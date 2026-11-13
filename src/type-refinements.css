@@ -1,0 +1,11 @@
+/* Small typographic refinements to the existing visual system. */
+.site-shell { -webkit-font-smoothing:antialiased; }
+.site-shell .showcase-intro h1 { font-weight:650; letter-spacing:-.035em; }
+.site-shell .experience-guide-heading h2,.site-shell .engineering-heading h2,.site-shell .section-heading h2,.site-shell .model-heading h2,.site-shell .long-context-heading h2,.site-shell .neube-copy h2 { font-weight:600; letter-spacing:-.025em; }
+.site-shell .reason-copy h3 { font-weight:550; letter-spacing:-.01em; }
+.site-shell .contact-copy h2 { font-weight:600; }
+.site-shell .collage-card-title,.site-shell .path-hint { font-variant-numeric:tabular-nums; }
+/* Readable labels on their actual model and paper surfaces. */
+.site-shell .model-section .viewer-label strong,.site-shell .long-context-section .long-context-model-label strong { color:#f2f2ea; }
+.site-shell .long-context-proof span { color:#52646b; font-weight:500; }
+.site-shell .long-context-step>span { color:#6c7b82; }

@@ -1,0 +1,115 @@
+/* Shared white navigation and application surfaces. Source images are never filtered. */
+.journey-header { background: #ffffffeb; color: #1d1d1f; backdrop-filter: blur(24px); font-family: -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif; }
+.journey-global { min-height: 68px; border-color: #f0f0f3; }
+.journey-brand { font-size: 20px; font-weight: 550; letter-spacing: -.03em; }
+.journey-symbol { color: #1d1d1f; font-size: 29px; }
+.journey-brand small { display: none; }
+.journey-global nav a, .journey-more summary { color: #6e6e73; font-size: 12px; }
+.journey-global nav a:hover, .journey-global nav .journey-global-current { color: #1d1d1f; }
+.journey-global-current::before { display: none; }
+.journey-local { min-height: 58px; border: 0; background: #fafafa; }
+.journey-location { color: #a1a1a6; font-size: 10px; }
+.journey-location>span { color: #c7c7cc; }
+.journey-location strong { color: #6e6e73; }
+.journey-local nav { padding: 7px 0; gap: 5px; }
+.journey-local nav a { border: 0; border-radius: 18px; padding: 9px 20px; color: #86868b; display: block; }
+.journey-local nav a:hover { background: #f0f0f3; color: #45454a; }
+.journey-local nav a[aria-current=page] { background: #fff; color: #1d1d1f; box-shadow: 0 2px 9px #2023330a; border: 0; }
+.journey-local nav small, .journey-index { display: none; }
+.journey-local nav strong { font-size: 11px; font-weight: 500; }
+.journey-more>div { background: #fffffff5; border: 1px solid #ececf0; border-radius: 20px; box-shadow: 0 18px 50px #252e4314; padding: 8px; }
+.journey-more[open] summary { color: #1d1d1f; }
+.journey-more>div>a { color: #1d1d1f!important; border-radius: 12px; }
+.journey-more>div>a:hover { background: #f5f5f7; }
+.journey-more small { color: #86868b; }
+.journey-header a:focus-visible { outline-color: #0071e3; }
+body:has(>.topbar) { background: #f5f5f7; }
+body:has(>.topbar) .topbar { background: #fff; border-color: #f0f0f3; padding-inline: 18px; }
+.viewer-page-label { color: #1d1d1f; }
+.viewer-page-label>span { display: none; }
+.viewer-count { color: #a1a1a6; }
+body:has(>.topbar) .workspace { gap: 14px; padding: 14px; }
+body:has(>.topbar) .panel { border: 1px solid #fff; border-radius: 22px; box-shadow: 0 8px 25px #252e4305; }
+body:has(>.topbar) .viewport { border: 1px solid #e6e9ee; border-radius: 25px; }
+body:has(>.topbar) .header-tools .about-button { border-color: #efeff2; background: #f8f8fa; color: #6e6e73; border-radius: 18px; }
+body:has(>.topbar) .panel-heading small, body:has(>.topbar) .viewport-heading>small, body:has(>.topbar) .details small { letter-spacing: .05em; }
+body:has(>.topbar) .panel-heading h2 { font-weight: 500; }
+body:has(>.topbar) .viewport-heading h1 { font-size: 22px; font-weight: 500; }
+body:has(>.topbar) .search { border-radius: 16px; background: #f7f7f9; }
+body:has(>.topbar) .toolbar, body:has(>.topbar) .experience-bar, body:has(>.topbar) .studio-strip { border-radius: 20px; box-shadow: 0 8px 25px #252e430b; }
+body:has(>.topbar) footer { color: #a1a1a6; background: #fff; border-color: #f1f1f3; }
+body[data-theme=night]:has(>.topbar) .topbar { background: #fff; }
+body[data-theme=night] .viewer-page-label { color: #1d1d1f; }
+body[data-theme=night]:has(>.topbar) .panel { background: #152725; border-color: #2e413b; }
+@media (max-width:760px) {
+ .journey-global { min-height: 60px; padding-block: 12px; }
+ .journey-local { min-height: 50px; padding-top: 7px; gap: 0; }
+ .journey-local nav { padding: 5px 0; }
+ .journey-local nav a { padding: 9px 12px; text-align: center; border-radius: 14px; }
+ .journey-global nav a, .journey-more summary { font-size: 10px; }
+ .journey-location { font-size: 8px; }
+ body:has(>.topbar) .workspace { padding: 8px; }
+}
+.journey-header { background: #f9faf7db; }
+.journey-local { background: #e5ecebb3; }
+body:has(>.topbar) { background: #dce5e8; }
+body:has(>.topbar) .topbar { background: #eff3f1; }
+body:has(>.topbar) .panel { box-shadow: 0 10px 25px #3448540d; }
+body:has(>.topbar) .viewport { border-color: #c3d1d8; }
+body>.cover { height: min(830px, calc(100svh - 182px)); min-height: 690px; }
+@media (max-width: 650px) { body>.cover { height: auto; min-height: 0; } }
+body>.cover { flex: 1; height: auto; min-height: 690px; max-height: none; }
+@media (max-width: 650px) { body>.cover { min-height: 0; flex: auto; } }
+/* Match the site-wide container and branded navigation. */
+.journey-header { width: min(1440px, calc(100% - 48px)); margin: 16px auto 0; border: 1px solid #ffffffd9; border-radius: 24px; background: linear-gradient(110deg, #fbfcf7ec, #e8f0f3e8); box-shadow: 0 10px 30px #34485412; overflow: visible; }
+.journey-global { min-height: 84px; padding: 14px 22px; gap: 20px; }
+.journey-brand { gap: 12px; }
+.journey-symbol { display: grid; place-items: center; flex: 0 0 45px; height: 45px; border-radius: 15px; border: 1px solid #c4d4db; background: #e1ebef; }
+.journey-symbol svg { width: 32px; height: 32px; stroke: #344f5e; stroke-width: 1.2; fill: none; }
+.journey-brand small { display: block; color: #72858c; font-size: 9px; margin-top: 5px; letter-spacing: .03em; font-family: inherit; }
+.journey-global nav { gap: 4px; padding: 5px; border: 1px solid #d0dce1; border-radius: 19px; background: #dfe8ecab; }
+.journey-global nav>a, .journey-global .journey-more>summary { display: flex; align-items: center; justify-content: center; min-width: 104px; min-height: 42px; padding: 10px 16px; border-radius: 14px; gap: 8px; font-size: 13px; color: #536b76; }
+.journey-global nav>a:hover, .journey-global .journey-more>summary:hover { background: #ffffff9c; }
+.journey-global nav>.journey-global-current { background: #fff; box-shadow: 0 3px 8px #34485410; color: #243c47; }
+.journey-local { padding-inline: 22px; border-radius: 0 0 23px 23px; border-top: 1px solid #d6e1e4; background: #e3ebedb3; }
+body>.cover { width: min(1440px, calc(100% - 48px)); }
+body:has(>.topbar) .topbar { width: min(1440px, calc(100% - 48px)); margin: 12px auto 0; border: 1px solid #ffffffc9; border-radius: 18px; }
+body:has(>.topbar) .workspace { width: min(1440px, calc(100% - 48px)); margin: 0 auto; padding: 12px 0; }
+@media(max-width:820px) {
+ .journey-header { width: calc(100% - 28px); margin-top: 12px; border-radius: 21px; }
+ .journey-global { padding: 12px 16px; flex-wrap: wrap; gap: 12px; }
+ .journey-brand small { font-size: 8px; }
+ .journey-global nav { width: auto; padding: 4px; }
+ .journey-global nav>a, .journey-global .journey-more>summary { min-width: 0; padding: 9px 12px; font-size: 11px; }
+ .journey-local { padding-inline: 12px; border-radius: 0 0 20px 20px; }
+ body>.cover { width: calc(100% - 28px); }
+ body:has(>.topbar) .topbar, body:has(>.topbar) .workspace { width: calc(100% - 28px); }
+}
+@media(max-width:520px) {
+ .journey-global { justify-content: center; }
+ .journey-brand { width: 100%; justify-content: flex-start; }
+ .journey-global nav { width: 100%; justify-content: stretch; }
+ .journey-global nav>a, .journey-global nav>details { flex: 1; }
+}
+
+/* Visible back action and single-line branding in every structure experience. */
+.journey-header, .journey-header *, .cover *, .cover *::before, body:has(>.topbar) .workspace *, body:has(>.topbar) .topbar * { -webkit-backdrop-filter: none; backdrop-filter: none; }
+.journey-header { background: linear-gradient(110deg, #fbfcf7, #e8f0f3); }
+.journey-brand { flex: 0 0 auto; width: max-content; white-space: nowrap; }
+.journey-brand>span:last-child { flex: none; white-space: nowrap; }
+.journey-brand small { white-space: nowrap; width: max-content; line-height: 1.5; }
+.journey-global nav>a, .journey-more summary { white-space: nowrap; }
+.journey-global nav>.journey-home { min-width: 62px; }
+.journey-local>a.journey-return { display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: none; padding: 9px 16px; min-height: 40px; background: #294653; color: #fff; border: 1px solid #294653; border-radius: 13px; font-size: 12px; font-weight: 500; white-space: nowrap; }
+.journey-return svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.6; flex: none; }
+.journey-local>a.journey-return:hover { background: #3d5b67; }
+.cover h1, .cover .lead, .model-label strong { text-wrap: balance; }
+.cover .model-label strong { max-width: 16em; }
+.cover .cover-paper { background: #fcfdfc; }
+.cover .preview-controls { background: #f8faf9; }
+@media(max-width:760px) {
+ .journey-local { flex-direction: row; flex-wrap: wrap; align-items: center; gap: 8px; padding-block: 10px; }
+ .journey-local>a.journey-return { padding: 8px 12px; min-height: 38px; font-size: 11px; }
+ .journey-local nav { flex: 1; min-width: 240px; align-self: center; padding: 0; }
+ .journey-global nav>.journey-home { min-width: 42px; }
+}

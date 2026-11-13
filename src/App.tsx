@@ -1,0 +1,664 @@
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
+import {
+  ArrowRight,
+  ChevronDown,
+  Database,
+  ExternalLink,
+  FileStack,
+  Menu,
+  Waypoints,
+  X,
+} from "lucide-react";
+
+const EXPLORER_URL = "/explore/";
+
+const TowerModelViewer = lazy(() =>
+  import("./TowerModelViewer").then((module) => ({ default: module.TowerModelViewer })),
+);
+const LongContextTowerViewer = lazy(() =>
+  import("./LongContextTowerViewer").then((module) => ({ default: module.LongContextTowerViewer })),
+);
+
+function DeferredViewer({ children, className }: { children: ReactNode; className: string }) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+    let nearViewport = false;
+    let timer = 0;
+    let mounted = false;
+    const scheduleMount = () => {
+      window.clearTimeout(timer);
+      if (!nearViewport || mounted) return;
+      timer = window.setTimeout(() => {
+        mounted = true;
+        setReady(true);
+        observer.disconnect();
+        window.removeEventListener("scroll", scheduleMount);
+      }, 160);
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      nearViewport = entry.isIntersecting;
+      scheduleMount();
+    }, { rootMargin: "200px 0px" });
+    observer.observe(host);
+    window.addEventListener("scroll", scheduleMount, { passive: true });
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", scheduleMount);
+    };
+  }, []);
+  const placeholder = <div className={className}><div className="viewer-status">三维模型将在靠近时载入</div></div>;
+  return <div ref={hostRef} className="deferred-viewer">{ready ? <Suspense fallback={placeholder}>{children}</Suspense> : placeholder}</div>;
+}
+
+const services = [
+  {
+    icon: FileStack,
+    title: "多源图纸接入",
+    english: "DRAWING INTAKE",
+    description: "接收扫描图、PDF、DWG、DXF 等存量资料，保留文件、版本与原始位置。",
+  },
+  {
+    icon: Waypoints,
+    title: "工程信息编译",
+    english: "ENGINEERING COMPILATION",
+    description: "读取图纸标注、尺寸与构件关系，并与物料表等工程资料交叉核验。",
+  },
+  {
+    icon: Database,
+    title: "可信结果交付",
+    english: "VERIFIED DELIVERY",
+    description: "由工程 Agent Harness 编排专业 Skills、工具与验证流程，输出可验证并能进入 CAD、PLM、数字孪生和 AI 系统的工程上下文。",
+  },
+];
+
+const customerGroups = [
+  { title: "电力与制造企业", description: "盘活存量图纸，为数据治理、资产管理和智能化建设提供工程数据。" },
+  { title: "CAD、PLM 与数字化平台", description: "获得可接入、可核验的构件、尺寸、关系与工程语义。" },
+  { title: "工业 AI 与 Agent 团队", description: "获得来自真实工程场景的高质量数据与上下文。" },
+];
+
+const pilotSteps = [
+  {
+    title: "资料与场景对齐",
+    english: "ALIGN",
+    description: "了解现有图纸、工程资料与业务流程，明确优先解决的真实问题。",
+  },
+  {
+    title: "交付标准定义",
+    english: "DEFINE",
+    description: "共同确认数据范围、质量标准、输出格式与工程验收方式。",
+  },
+  {
+    title: "联合验证",
+    english: "VALIDATE",
+    description: "选取具有代表性的资料完成交付闭环，以真实工程结果验证能力与边界。",
+  },
+  {
+    title: "批量落地",
+    english: "SCALE",
+    description: "在验收基础上扩展处理规模、图纸类型，并接入客户现有系统与工作流。",
+  },
+];
+
+const researchAreas = [
+  {
+    label: "MULTIMODAL UNDERSTANDING",
+    title: "工业多模态理解",
+    description: "联合理解工程图像、文本、表格与文档。",
+  },
+  {
+    label: "GEOMETRY & RELATIONS",
+    title: "几何、拓扑与工程关系",
+    description: "恢复构件、连接、约束与跨视图关系。",
+  },
+  {
+    label: "STRUCTURED PREDICTION",
+    title: "结构化工程表达",
+    description: "以 Schema 和中间表示组织可计算的工程信息。",
+  },
+  {
+    label: "ENGINEERING AGENT HARNESS",
+    title: "工程 Agent Harness",
+    description: "编排模型、领域 Skills、工具与验证流程。",
+  },
+  {
+    label: "DATA & EVALUATION",
+    title: "数据构造与可靠评测",
+    description: "用真实失败案例建设数据与评测体系。",
+  },
+];
+
+// Source: MRTT/HR recruitment Markdown drafts.
+const jobs = [
+  {
+    "title": "Agent 工程师（工程求解与 CAD 建模方向）",
+    "english": "AGENT ENGINEER / ENGINEERING & CAD",
+    "summary": "MRTT 正在建设面向工业场景的 Agent 工程求解与 CAD 建模系统：让 AI 理解真实工程图纸与专业资料，在工程师指导下开展调研、制定方案、调用工具、完成建模，并对结果进行校验和修正。\n\n这是一条需要持续探索的复杂任务链路：资料可能不完整，图纸之间可能存在隐含关联，建模过程需要满足几何与工程约束，执行结果又会带来新的问题。我们正在把多模态模型、Agent、专业工具和工程知识结合起来，让系统能够在真实问题中持续推进任务，交付可检查、可追溯的结果。\n\n我们也在建设持续迭代的数据闭环：把真实任务中的输入、执行轨迹、工具反馈与专家修正，转化为高质量数据和评测依据，持续改进 Agent 与模型，让系统在解决工程问题的过程中积累能力。",
+    "context": "一个典型任务是：面对建模目标，让 Agent 识别信息缺口、查阅相关资料与工具文档、提出可执行的建模方案、调用 CAD 与计算工具进行试验、依据校验结果调整方案，并在关键决策处向工程师提供证据和待确认事项。你负责设计这条链路，观察它如何执行，并推动它逐步完成更复杂的任务。\n\n你将设计长链路 Agent，接入图纸解析、几何计算、CAD 与校验工具，并深入分析真实任务中的成功与失败：问题来自数据缺失、上下文组织、工具能力，还是模型理解与推理？将这些判断转化为数据整理、任务设计与系统改进，通过评测验证效果，逐步建立“任务执行—反馈采集—数据沉淀—能力改进—再次验证”的数据飞轮。",
+    "requirements": [
+      "亲手推进过 AI 项目：能展示一个由你主导或深度参与的 Agent / 自动化研究 / 工具使用 / 复杂任务求解项目，讲清你的贡献、关键设计、失败过程和改进结果",
+      "对大模型有深入理解和实践判断：理解上下文、工具调用、多模态理解与推理的能力边界，能够通过实验区分模型、数据和系统设计的问题，并判断何时调整输入、工具与流程，何时需要模型适配或后训练",
+      "对数据有洞察力：能从杂乱的工程资料、执行轨迹和失败案例中识别关键差异，判断哪些信息缺失、哪些反馈有价值，并将其整理为可用于评测、训练或系统改进的数据；重视数据质量、代表性与独立验证",
+      "扎实的 Python（或其他熟悉语言）编程与调试能力，能把实验原型推进到可复现的端到端流程",
+      "熟练使用 AI 编程与研究工具，能给 AI 清晰的目标和反馈，也能独立审查其产出、验证关键假设，对最终结果负责",
+      "愿意深入理解工程与几何问题，与领域专家协作，把专业知识转化为数据定义、工具能力和可验证的任务约束",
+      "有自主推进意识，能在目标明确、路径尚需探索的情况下提出方案、开展试验、记录结论并持续迭代"
+    ],
+    "background": "",
+    "preferred": [
+      "AI4Science / AI4Industry：用 AI 推进科学研究、仿真计算、工程设计或制造等实际问题求解，有可展示的成果",
+      "真实任务中跑通过的 Agent 项目：长任务规划、复杂工具使用、多 Agent 协作，并能说明系统的实际表现与改进过程",
+      "数据闭环与模型改进：处理过工程图纸、实验记录、仿真输出或 Agent 轨迹，做过数据筛选、合成数据、反馈学习或模型后训练，并能说明数据如何带来可验证的能力提升",
+      "工程与几何工具：接触过 CAD/CAE、参数化建模、几何计算、约束求解、机器人或数字孪生",
+      "公开技术成果：开源项目、论文、技术文章或持续维护的个人作品"
+    ],
+    "internship": "欢迎本科生、硕士生和博士生，课程项目、实验室研究、竞赛及个人作品都可以作为交流起点。优先考虑能连续实习 4 个月及以上者，到岗时间和每周工作天数可沟通；对优秀实习生开放长期合作或转正机会。",
+    "benefits": [
+      "参与 Agent 解决真实工业问题的完整过程，直接看到调研、工具、数据和模型能力如何共同影响工程结果",
+      "与团队及领域专家共同定义任务、架构和验证方法，作为早期成员影响技术路线",
+      "在复杂任务求解、CAD 工具使用和数据反馈迭代中积累可复用的方法与作品"
+    ],
+    "applicationIntro": "发送简历至 chenwy1@getui.com。欢迎附上一个最能代表你近期探索的项目（链接 / 演示 / 代码仓库 / 技术文章均可），简短说明：",
+    "applicationQuestions": [
+      "你希望解决什么问题，Agent 实际完成了哪些工作？",
+      "你做了哪些关键设计与指导，如何验证结果？",
+      "哪次失败或新技术尝试，让你改变了原来的做法？"
+    ],
+    "applicationNote": "我们尤其期待看到 2026 年以来的探索与成果。涉及保密的项目可以提供脱敏说明，投递阶段无需另行准备长篇材料。初步交流将围绕你的实际项目、技术判断和兴趣方向展开。"
+  },
+  {
+    "title": "AI 算法工程师（模型与学习方向）",
+    "english": "AI ALGORITHM ENGINEER / MODELS & LEARNING",
+    "summary": "MRTT 正在建设面向复杂工程任务的 Agent 系统，当前从工程图纸理解、参数化建模与结果校验切入，让 AI 在工程师指导下开展调研、调用专业工具并推进问题求解。\n\n真实任务会不断暴露模型的能力边界，也会产生有价值的执行轨迹、工具反馈和专家修正。我们希望把这些经验转化为数据与学习信号，持续提升模型和 Agent 的理解、推理与求解能力，建立“任务执行—反馈采集—数据沉淀—能力改进—再次验证”的数据飞轮。",
+    "context": "你将与 Agent 工程师、领域专家协作，发现能力瓶颈，研究模型、数据与算法改进，并通过实验验证效果。\n\n- 研究模型与 Agent 的能力提升。 围绕大语言模型、多模态模型的专业理解、推理和工具使用，探索数据构造、模型适配、后训练、蒸馏或反馈学习等方法；根据任务需要改进规划、搜索、候选选择与验证策略。\n- 从失败中定位研究问题。 分析模型输出与执行轨迹，区分信息缺失、模型理解、推理策略和工具能力等因素，提出可检验的假设，设计对照实验并迭代方法。\n- 建设有效的数据与学习信号。 从工程图纸、专业资料、工具结果与专家修正中识别高价值样本，设计数据筛选、合成与质量检查方法，将任务反馈转化为训练素材、评测样例或策略改进依据。\n- 验证并交付能力提升。 建立可靠基线与独立评测，检查数据泄漏、泛化效果和能力回退；与 Agent 工程师共同将算法成果接入系统，衡量任务成功率、结果正确性、人工介入及时间成本的变化。",
+    "requirements": [
+      "在模型或算法的某一方向有扎实积累，例如 LLM／多模态模型、后训练、推理、Agent 学习、搜索或优化；能够解释方法的机制、适用条件与能力边界",
+      "亲手做过模型训练、后训练或算法能力提升实验，能讲清问题、个人贡献、数据、基线和改进结果；研究项目、开源工作及个人实验均可作为依据",
+      "对数据有洞察力，能从杂乱资料和失败案例中识别关键差异，判断哪些信息值得采集、哪些反馈可以用于学习，并关注数据质量、代表性与来源",
+      "具备扎实的 Python 与算法实现能力，熟悉 PyTorch 或同类框架，能阅读研究代码、实现方法、调试实验并复现结果",
+      "重视实验设计与证据，能通过对照实验判断收益来自哪里，并检查方法在新样本、新任务上是否仍然有效",
+      "主动探索新的 AI 方法，熟练使用 AI 编程与研究工具，同时能独立审查产出、验证假设，对研究结论负责",
+      "愿意深入真实工程场景，与领域专家和工程团队协作，把研究成果推进到实际系统"
+    ],
+    "background": "欢迎在一个相关方向有深度的候选人，不要求精通所有模型与工程软件。已有视觉、机器人或科学计算积累，近期开展大模型研究的同学，同样欢迎申请。",
+    "preferred": [
+      "模型后训练与反馈学习：做过监督微调、偏好优化、强化学习、知识蒸馏或 on-policy distillation，能说明方法选择、数据设计与实际收益",
+      "Agent 能力研究：研究过多步推理、工具使用、轨迹学习、规划搜索或验证机制，并在真实任务中取得可复现的改进",
+      "数据闭环：做过困难样本挖掘、合成数据、轨迹筛选、过程监督或自动评测，能说明数据如何带来可验证的能力提升",
+      "AI4Science / AI4Industry：用 AI 推进科学研究、仿真计算、工程设计或制造问题求解；或将几何、约束求解等专业算法与模型、Agent 结合",
+      "公开技术成果：有论文、开源贡献、技术报告或持续维护的实验项目，能体现研究深度与独立判断"
+    ],
+    "internship": "欢迎本科生、硕士生和博士生，实验室研究、课程项目、竞赛与个人实验均可作为交流起点。优先考虑能连续实习 4 个月及以上者，到岗时间和每周工作天数可沟通；对优秀实习生开放长期合作或转正机会。",
+    "benefits": [
+      "围绕真实工程任务研究模型与算法，看到数据和学习方法如何改变系统表现",
+      "与团队共同定义研究问题、数据策略和评测方法，作为早期成员影响技术路线",
+      "积累从问题发现、实验验证到系统落地的完整研究经验，参与建设可持续迭代的数据飞轮"
+    ],
+    "applicationIntro": "发送简历至 chenwy1@getui.com，邮件主题可注明“AI 算法工程师”。欢迎附上一个最能代表你近期能力提升工作的项目、论文、代码仓库或实验记录，简短说明：",
+    "applicationQuestions": [
+      "你发现了什么能力瓶颈，提出了什么假设？",
+      "你做了哪些数据、模型或算法改进，本人负责什么？",
+      "如何证明改进有效，在新任务上表现如何，还有哪些局限？"
+    ],
+    "applicationNote": "我们尤其期待看到近期主动探索新 AI 方法的经历与成果。涉及保密的项目可以提供脱敏说明，投递阶段无需另行准备长篇材料。初步交流将围绕你的实际研究、实验判断和兴趣方向展开。"
+  }
+];
+
+type PageId = "home" | "product" | "research" | "about" | "careers";
+
+const pageFromHash = (): PageId => {
+  const route = window.location.hash.replace("#/", "");
+  return route === "product" || route === "research" || route === "about" || route === "careers" ? route : "home";
+};
+
+function ContactBand() {
+  return (
+    <section className="contact-section" aria-labelledby="contact-title">
+      <div className="page-grid contact-layout">
+        <div className="contact-copy">
+          <h2 id="contact-title">聊聊你的工程资料。</h2>
+          <p>提供图纸或需求，一起确认数据范围与交付方式。</p>
+        </div>
+        <div className="contact-actions">
+          <a className="primary-button light-button" href="mailto:chenwy1@getui.com?subject=仝心圆%20试点合作">
+            联系合作 <ArrowRight size={17} />
+          </a>
+          <a className="contact-email" href="mailto:chenwy1@getui.com">chenwy1@getui.com</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
+  return (
+    <main>
+      <section className="showcase-hero" id="top">
+        <div className="showcase-intro">
+          <p className="showcase-kicker">仝心圆 · 结构漫游</p>
+          <h1>从图纸，<br />到三维。</h1>
+          <p>旋转整塔，探索模块，走近每一处连接。</p>
+          <div className="showcase-actions">
+            <a className="primary-button" href={EXPLORER_URL}>打开结构漫游 <ArrowRight size={16} /></a>
+            <button className="text-button" onClick={() => navigate("product")}>了解产品 <ArrowRight size={16} /></button>
+          </div>
+        </div>
+        <div className="product-collage" aria-label="图纸、真实界面与铁塔模型的产品展示">
+          <a className="collage-card collage-drawing" href="#/product">
+            <div className="collage-card-title"><span>工程图纸</span><span>↗</span></div>
+            <img src="/images/complete-tower-head-drawing.png" alt="原始塔头工程图纸" />
+          </a>
+          <a className="collage-card collage-screen" href="/explore/explore.html">
+            <div className="collage-card-title"><span className="window-dots" aria-hidden="true">● ● ●</span><span>结构漫游</span><span>↗</span></div>
+            <img src="/explore/showcase/explorer-original.jpg" alt="三维展厅的原始完整界面截图" />
+          </a>
+          <a className="collage-card collage-film" href="/explore/film/">
+            <img src="/explore/film/poster-v25-preview.webp" alt="原版结构漫游影片封面" />
+            <div className="collage-card-title"><span>影片导览</span><span>03:12 ▷</span></div>
+          </a>
+          <a className="collage-object" href={EXPLORER_URL} aria-label="打开铁塔三维漫游">
+            <img src="/explore/tower-preview-v26.webp" alt="保持原色与比例的九模块铁塔模型" />
+          </a>
+          <div className="collage-glass"><span className="collage-orbit" aria-hidden="true">◎</span><div><strong>同一座塔，从不同尺度看。</strong><span>整塔 · 模块 · 构件</span></div></div>
+        </div>
+      </section>
+
+      <section className="experience-guide" aria-labelledby="experience-guide-title">
+        <div className="page-grid">
+          <div className="experience-guide-heading"><div><p className="section-index">START EXPLORING</p><h2 id="experience-guide-title">选择你的打开方式。</h2></div><p>可以先看全貌，也可以直接进入展厅。</p></div>
+          <div className="experience-paths">
+            <a href={EXPLORER_URL}><span className="path-number">01 / START</span><strong>漫游封面 <ArrowRight size={21} /></strong><p>旋转整塔、展开模块，快速认识这座结构。</p><span className="path-hint">推荐从这里开始</span></a>
+            <a href="/explore/explore.html"><span className="path-number">02 / EXPLORE</span><strong>三维展厅 <ArrowRight size={21} /></strong><p>选择模块与构件，查看细节、剖切和空间关系。</p><span className="path-hint">直接进入交互模型</span></a>
+            <a href="/explore/film/"><span className="path-number">03 / WATCH</span><strong>影片导览 <ArrowRight size={21} /></strong><p>用三分钟，看见从图纸到三维模型的演绎过程。</p><span className="path-hint">观看 03:12 影片</span></a>
+          </div>
+          <p className="experience-guide-foot">想了解背后的产品与方法？ <a href="#/product">阅读产品介绍 ↗</a></p>
+        </div>
+      </section>
+
+      <section className="problem-section section-light" aria-labelledby="problem-title">
+        <div className="page-grid problem-heading engineering-heading">
+          <div><p className="section-index">WHY ENGINEERING AGENTS</p><h2 id="problem-title">从图纸细节，理解结构。</h2></div>
+          <p>工程 Agent 结合基座模型、专业规则与工具，逐步核验几何和连接关系，让每一个工程解释都有据可查。</p>
+        </div>
+        <div className="page-grid engineering-reasons illustrated-reasons">
+          <article>
+            <figure className="reason-visual"><img src="/images/engineering/projection.webp" width="1536" height="1024" loading="lazy" alt="三维钢框架投影为二维矩形，深度信息不再可见" /></figure>
+            <div className="reason-copy"><h3>一张投影，多种空间解释</h3><p>二维图纸中的深度与遮挡，需要更多证据。</p></div>
+          </article>
+          <article>
+            <figure className="reason-visual"><img src="/images/engineering/constraints.webp" width="1536" height="1024" loading="lazy" alt="手绘支架和经验说明转为带基准线、尺寸与直角约束的模型" /></figure>
+            <div className="reason-copy"><h3>把工程经验变成约束</h3><p>把基准与制图约定，变成可执行的规则。</p></div>
+          </article>
+          <article>
+            <figure className="reason-visual"><img src="/images/engineering/connections.webp" width="1536" height="1024" loading="lazy" alt="同一交叉投影可对应连接在一起或前后错开的钢构件" /></figure>
+            <div className="reason-copy"><h3>外观相似，连接未必相同</h3><p>连接或前后错开，让图纸证据给出答案。</p></div>
+          </article>
+        </div>
+        <div className="page-grid engineering-method">
+          <div className="method-heading"><p className="section-index">HOW THE AGENT WORKS</p><h3>让每一步解释，都有核验的依据</h3><p>基座模型提出候选，工程规则与工具参与验证；在新证据中持续修订。</p></div>
+          <div className="verification-stage">
+            <span className="method-caption">图纸 ⇄ 三维</span>
+            <figure className="verification-visual">
+              <img src="/images/engineering/verification-loop.webp" width="2172" height="724" loading="lazy" alt="工程 Agent 核验闭环：读取图纸提出解释，保留候选方案，调用测量与约束工具，再根据证据修订并返回图纸核验" />
+              <figcaption><ol className="verification-labels"><li>提出解释</li><li>保留候选</li><li>调用工具</li><li>依据修订</li></ol></figcaption>
+            </figure>
+          </div>
+          <p className="engineering-outcome">我们追求的工程解释：<strong>有依据、可解释、可复核。</strong></p>
+        </div>
+      </section>
+
+      <section className="neube-section" aria-labelledby="neube-title">
+        <div className="page-grid neube-layout">
+          <div className="neube-copy">
+            <p className="section-index">OPEN SOURCE / NEUBE SR</p>
+            <h2 id="neube-title"><span className="text-unit">从角钢塔开始，</span><span className="text-unit">重构工程 AI 的方法。</span></h2>
+            <p>NeuBE-Structural-Rebuild 是一套 fully open-source、可 Fork 的 AI Agent Skill 基座。它把图纸、观察、假设、语义、约束和复核组织成可追溯的结构重构流程。</p>
+            <p>角钢输电塔是第一个高难度压力测试：结果不仅要有三维形状，还要保留证据、身份和验证状态。</p>
+            <a className="text-button" href="/neube-sr-showcase/index.html">跨领域工程数据参数化重建解决方案 <ArrowRight size={17} /></a>
+          </div>
+          <a className="neube-image" href="/neube-sr-showcase/index.html" aria-label="打开跨领域工程数据参数化重建解决方案">
+            <span className="neube-visual-label">NeuBE / Structural Rebuild</span>
+            <span className="neube-model-sheet"><img src="/images/neube-sr-complete-tower.png" alt="NeuBE SR 重构的完整彩色角钢塔" /></span>
+            <span className="neube-source-sheet"><span>从原始图纸出发</span><img src="/images/complete-tower-head-drawing.png" alt="作为结构重建来源的原始塔头图纸" loading="lazy" /></span>
+            <span className="neube-image-link">查看重建方法 <ArrowRight size={17} /></span>
+          </a>
+        </div>
+      </section>
+      <ContactBand />
+    </main>
+  );
+}
+
+function ProductPage() {
+  return (
+    <main>
+      <section className="inner-hero product-hero">
+        <div className="page-grid product-hero-layout">
+          <div className="product-hero-copy">
+            <p className="eyebrow">仝心圆 / DRAWING MODELING AI</p>
+            <h1>图纸建模</h1>
+            <p>仝心圆让图纸中的几何、构件、尺寸、拓扑与依据成为机器可读、可验证、可调用的数据，连接 CAD、PLM、数字孪生和 AI Agent。</p>
+          </div>
+          <figure className="hero-picture"><img src="/images/product-hero-industrial-v1.webp" alt="工程图纸与机械模型的原始产品配图" /></figure>
+        </div>
+      </section>
+      <section className="model-section" aria-labelledby="model-title">
+        <div className="page-grid model-heading">
+          <div><p className="section-index light">AI-NATIVE ENGINEERING CONTEXT</p><h2 id="model-title">从二维视图，查看三维几何</h2></div>
+          <p>多模态 AI 与工程 Agent Harness 读取尺寸、标注和构件关系，交叉核对物料表，并通过几何求解确保结果精确、可核验。</p>
+        </div>
+        <DeferredViewer className="tower-viewer"><TowerModelViewer /></DeferredViewer>
+        <div className="precision-strip">
+          <article><span>DRAWING READINGS</span><strong>图纸读数</strong><p>读取尺寸、标注、构件编号与跨视图对应关系。</p></article>
+          <article><span>BOM CROSS-CHECK</span><strong>物料表核验</strong><p>交叉核对构件规格、数量、编号与工程资料。</p></article>
+          <article><span>GEOMETRY VALIDATION</span><strong>几何求解验证</strong><p>检查拓扑连接、几何约束、结构闭合与工程一致性。</p></article>
+        </div>
+      </section>
+      <section className="long-context-section" aria-labelledby="long-context-title">
+        <div className="page-grid long-context-heading">
+          <div>
+            <p className="section-index light">LONG-CONTEXT RECONSTRUCTION</p>
+            <h2 id="long-context-title">多张图纸，一个结构。</h2>
+          </div>
+          <p>面对跨页图纸、重复编号、投影重合和分段装配，系统持续保留构件身份、跨视图关系和模块依赖，完成更长链条的结构建模。</p>
+        </div>
+        <div className="page-grid long-context-layout">
+          <div className="long-context-copy">
+            <div className="long-context-step"><span>01</span><div><strong>跨页证据连续</strong><small>Multi-page evidence</small><p>图纸页码、视图区域、标注和版本都进入同一条证据链。</p></div></div>
+            <div className="long-context-step"><span>02</span><div><strong>跨视图身份一致</strong><small>Cross-view identity</small><p>正视、侧视、剖面和局部大样共同指向同一个物理构件。</p></div></div>
+            <div className="long-context-step"><span>03</span><div><strong>跨模块装配闭合</strong><small>Multi-module assembly</small><p>M1–M6 分段连接、共享节点和依赖状态在整体模型中保持一致。</p></div></div>
+          </div>
+          <DeferredViewer className="long-context-viewer"><LongContextTowerViewer /></DeferredViewer>
+        </div>
+        <div className="page-grid long-context-proof"><span>6 个模块</span><span>多页图纸</span><span>多视图关联</span><span>统一三维装配</span></div>
+      </section>
+      <section className="explorer-case" aria-labelledby="explorer-case-title">
+        <div className="page-grid explorer-case-layout">
+          <div>
+            <p className="section-index">INTERACTIVE CASE / T0713</p>
+            <h2 id="explorer-case-title">案例体验｜九模块铁塔</h2>
+            <p>从整塔进入模块，选中构件查看细节。自由旋转、拆分结构，在三维空间里探索每一处连接。</p>
+            <p className="explorer-case-scope">九模块展示 · 塔腿待补 · 非施工依据</p>
+          </div>
+          <div className="explorer-case-actions">
+            <a className="primary-button" href={EXPLORER_URL}>进入结构漫游 <ArrowRight size={17} /></a>
+            <a className="text-button" href="/explore/film/">观看建模影片 <ArrowRight size={17} /></a>
+          </div>
+        </div>
+      </section>
+      <section className="business-section inner-section" aria-labelledby="delivery-title">
+        <div className="page-grid section-heading"><div><p className="section-index">DATA PIPELINE</p><h2 id="delivery-title">从一张图，到可供 AI 使用的工程上下文</h2></div><p>围绕真实使用场景，共同确定数据范围、质量标准、交付格式和工程验收方式。</p></div>
+        <div className="page-grid service-list">{services.map((service) => { const Icon = service.icon; return <article className="service-row" key={service.title}><Icon size={27} strokeWidth={1.6} /><div><h3>{service.title}</h3><span>{service.english}</span></div><p>{service.description}</p></article>; })}</div>
+      </section>
+      <section className="output-section" aria-labelledby="customer-title">
+        <div className="page-grid output-heading"><div><p className="section-index light">WHO WE SERVE</p><h2 id="customer-title">让工程上下文，在更多系统中发挥作用</h2></div><p>从企业数据治理，到工业软件与 AI 应用，让同一份工程知识持续被机器理解和调用。</p></div>
+        <div className="page-grid outcome-grid customer-grid">{customerGroups.map((group) => <article key={group.title}><h3>{group.title}</h3><p>{group.description}</p></article>)}</div>
+      </section>
+      <section className="pilot-section" aria-labelledby="pilot-title">
+        <div className="page-grid pilot-heading"><div><p className="section-index">HOW WE WORK</p><h2 id="pilot-title">合作，从真实工程资料开始</h2></div><p>围绕一个明确的业务场景，共同定义数据边界、交付结果与验收标准，再将经过验证的能力带入更大规模的工程流程。</p></div>
+        <div className="page-grid pilot-steps">{pilotSteps.map((step) => <article key={step.title}><span>{step.english}</span><h3>{step.title}</h3><p>{step.description}</p></article>)}</div>
+      </section>
+      <ContactBand />
+    </main>
+  );
+}
+
+function AboutPage() {
+  return (
+    <main>
+      <section className="inner-hero about-hero">
+        <div className="page-grid inner-hero-layout"><div><p className="eyebrow">关于仝心圆 / ABOUT</p><h1>关于仝心圆</h1></div><p>我们是一家专注工业工程数据的 AI 公司，建设连接历史图纸、工程经验与新一代工业系统的数据基础。</p></div>
+      </section>
+      <section className="backing-section" aria-labelledby="backing-title">
+        <div className="page-grid backing-layout">
+          <p className="section-index">INDUSTRY ECOSYSTEM</p>
+          <div className="backing-copy">
+            <h2 id="backing-title">扎根数据智能与产业创新生态</h2>
+            <p>MRTT 聚焦工业存量图纸的数据智能化，把复杂、分散的工程资料转化为可验证并能够进入真实业务流程的工程上下文。</p>
+          </div>
+          <div className="affiliation-links" aria-label="关联品牌与企业">
+            <a href="https://ge.cn/" target="_blank" rel="noreferrer">每日互动 <ExternalLink size={16} /></a>
+            <a href="https://www.getui.com/" target="_blank" rel="noreferrer">个推 <ExternalLink size={16} /></a>
+            <a href="https://www.taichang.com/m/" target="_blank" rel="noreferrer">泰昌集团 <ExternalLink size={16} /></a>
+          </div>
+        </div>
+      </section>
+      <section className="direction-section">
+        <div className="page-grid direction-lead"><p className="section-index">DIRECTION</p><h2>从铁塔出发，把一条工程数据链路做深做透</h2><p>当前以电力铁塔图纸为起点，把经过验证的数据能力逐步带向更多工业场景。</p></div>
+        <div className="page-grid direction-grid">
+          <article><strong>吃透一个行业</strong><p>围绕电力铁塔建立真实可验收的数据标准、产品能力和交付闭环。</p></article>
+          <article><strong>让数据越用越好</strong><p>持续积累标准、行业知识和反馈数据，让每次交付提升后续能力。</p></article>
+          <article><strong>接入更多系统</strong><p>服务 CAD、PLM、数字孪生、知识库和 AI Agent Harness，成为可靠的工程数据来源。</p></article>
+        </div>
+      </section>
+      <section className="about-section compact-about"><div className="page-grid about-layout"><div className="about-copy"><p className="section-index">TEAM</p><h2>跨越 AI 与工程行业</h2><p>团队结合垂直领域 AI、复杂数据工程与铁塔行业经验，共同定义数据标准和交付结果。</p></div><div className="about-statement"><strong>DATA ENGINEERING<br />FOR THE PHYSICAL WORLD</strong><p>让行业知识成为可持续使用的数据</p></div></div></section>
+      <ContactBand />
+    </main>
+  );
+}
+
+function ResearchPage() {
+  return (
+    <main>
+      <section className="inner-hero research-hero">
+        <div className="page-grid research-hero-layout">
+          <div className="research-hero-copy">
+            <p className="eyebrow">仝心圆研究 / RESEARCH</p>
+            <h1>技术研究</h1>
+            <p>聚焦多模态理解、几何与拓扑、工程 Agent Harness。</p>
+          </div>
+          <figure className="hero-picture"><img src="/images/research-hero-lab-v1.webp" alt="工程实验室原始配图" /></figure>
+        </div>
+      </section>
+      <section className="research-section" aria-labelledby="research-title">
+        <div className="page-grid section-heading research-heading">
+          <div><p className="section-index">RESEARCH DIRECTIONS</p><h2 id="research-title">工程数据编译的关键问题</h2></div>
+          <p>研究成果必须可复现、可评测，并进入产品。</p>
+        </div>
+        <div className="page-grid research-list">
+          {researchAreas.map((area) => (
+            <article key={area.title}>
+              <span>{area.label}</span>
+              <h3>{area.title}</h3>
+              <p>{area.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+      <div className="page-grid research-method-link"><span>OPEN SOURCE / NEUBE SR</span><a href="/neube-sr-showcase/index.html">查看开源工程重建方法 <ArrowRight size={18} /></a></div>
+      <section className="harness-section" aria-labelledby="harness-title">
+        <div className="page-grid harness-heading">
+          <div><p className="section-index">AGENT HARNESS</p><h2 id="harness-title">让 AI 在工程约束下完成复杂任务</h2></div>
+          <div>
+            <p>用 Agent Harness 组织模型、领域 Skills、专业工具与验证器，从高约束任务中建立可靠工作流。</p>
+          </div>
+        </div>
+        <div className="page-grid harness-grid">
+          <article><span>TASK SCAFFOLD</span><h3>任务骨架</h3><p>将复杂工程目标拆解为有状态、可观测的处理阶段。</p></article>
+          <article><span>DOMAIN SKILLS</span><h3>领域 Skills</h3><p>沉淀专业任务所需的知识边界、输入要求与能力模块。</p></article>
+          <article><span>TOOLS & SOLVERS</span><h3>工具与求解器</h3><p>连接解析、几何、规则与 CAD 工具，处理需要确定性的环节。</p></article>
+          <article><span>VERIFICATION</span><h3>验证与复核</h3><p>通过评测、验证器和专家判断管理错误、歧义与结果质量。</p></article>
+        </div>
+      </section>
+      <section className="output-section research-values" aria-labelledby="research-values-title">
+        <div className="page-grid output-heading">
+          <div><p className="section-index light">HOW WE RESEARCH</p><h2 id="research-values-title">从真实数据出发，用工程结果回答</h2></div>
+          <p>模型、规则、工具和专家判断，共同对结果负责。</p>
+        </div>
+        <div className="page-grid outcome-grid customer-grid">
+          <article><h3>真实问题</h3><p>从企业资料和实际工作流中定义任务，持续面对噪声、缺失和长尾情况。</p></article>
+          <article><h3>可靠评测</h3><p>建设独立数据集、失败分析和端到端验收，不以少量展示样例判断能力。</p></article>
+          <article><h3>研究进入产品</h3><p>将实验结果沉淀为数据标准、工具、工作流和可以持续迭代的产品模块。</p></article>
+        </div>
+      </section>
+      <section className="research-cta">
+        <div className="page-grid research-cta-layout">
+          <div><p className="section-index">WORK WITH US</p><h2>和我们一起，把开放问题做成真实能力</h2></div>
+          <div>
+            <p>欢迎有 Agent 实践成果，以及 AI4Science、AI4Industry 与工程数据背景的研究者和工程师。</p>
+            <a className="text-button" href="#/careers">查看开放岗位 <ArrowRight size={17} /></a>
+          </div>
+        </div>
+      </section>
+      <ContactBand />
+    </main>
+  );
+}
+
+function CareersPage({ openJob, setOpenJob }: { openJob: number | null; setOpenJob: (value: number | null) => void }) {
+  return (
+    <main>
+      <section className="inner-hero careers-hero">
+        <div className="page-grid inner-hero-layout">
+          <div><p className="eyebrow">AI4INDUSTRY · BUILD WITH US</p><h1>加入仝心圆</h1></div>
+          <p>欢迎 Builder 加入复杂工业场景的 AI 攻关。从工程图纸与专业数据出发，让多模态模型、专业算法与工具协同求解，让执行反馈持续推动能力进化。一起迈出 AI4Industry 深入复杂垂域的第一步，构建能够自主推进任务、持续学习的异构 AI 系统。</p>
+        </div>
+        <ul className="page-grid career-builder-themes" aria-label="我们的攻关方向"><li>多模型协同</li><li>专业工具求解</li><li>数据驱动进化</li></ul>
+      </section>
+      <section className="career-facts" aria-label="招聘基本信息">
+        <div className="page-grid career-facts-grid">
+          <div><span>LOCATION</span><strong>杭州</strong></div>
+          <div><span>EMPLOYMENT</span><strong>实习 · 应届 · 全职<br />顾问 · 兼职共创</strong></div>
+          <div><span>STAGE</span><strong>龙头制造业公司和上市科技企业合资新创业公司</strong></div>
+          <div><span>COMPENSATION</span><strong>市场竞争力薪资和潜在股权激励</strong></div>
+        </div>
+      </section>
+      <section className="careers-section" aria-labelledby="careers-title">
+        <div className="page-grid careers-heading">
+          <div><p className="section-index">OPEN ROLES</p><h2 id="careers-title">开放岗位</h2></div>
+          <p>Agent 工程与模型算法两个方向。点击岗位查看详情，不以工作年限为主要定薪依据。</p>
+        </div>
+        <div className="page-grid job-list">
+          {jobs.map((job, index) => {
+            const isOpen = openJob === index;
+            return (
+              <article className={`job-row ${isOpen ? "is-open" : ""}`} key={job.title}>
+                <button
+                  onClick={() => setOpenJob(isOpen ? null : index)}
+                  aria-expanded={isOpen}
+                  aria-controls={`job-details-${index}`}
+                >
+                  <span className="job-title"><strong>{job.title}</strong><small>{job.english}</small></span>
+                  <span className="job-type">杭州 · 实习 / 应届 / 全职 / 顾问 / 兼职共创</span>
+                  <ChevronDown size={22} />
+                </button>
+                <div className="job-details" id={`job-details-${index}`} aria-hidden={!isOpen}>
+                  {job.summary.split("\n\n").map((paragraph) => <p className="job-summary" key={paragraph}>{paragraph}</p>)}
+                  <h3 className="job-context-title">你将做的事</h3>
+                  {job.context.split("\n\n").map((paragraph) => paragraph.startsWith("- ") ? <ul className="application-questions" key={paragraph}>{paragraph.split("\n").map((item) => <li key={item}>{item.replace(/^- /, "")}</li>)}</ul> : <p className="job-summary" key={paragraph}>{paragraph}</p>)}
+                  <div className="role-detail-grid role-support-grid">
+                    <section><h3>我们希望你</h3><ul>{job.requirements.map((item) => <li key={item}>{item}</li>)}</ul></section>
+                    <section><h3>加分项（不要求全部具备）</h3><ul>{job.preferred.map((item) => <li key={item}>{item}</li>)}</ul></section>
+                  </div>
+                  {job.background && <p className="job-summary">{job.background}</p>}
+                  <div className="role-detail-grid role-support-grid">
+                    <section><h3>在校生说明</h3><p className="job-summary">{job.internship}</p></section>
+                    <section><h3>你将获得</h3><ul>{job.benefits.map((item) => <li key={item}>{item}</li>)}</ul></section>
+                  </div>
+                  <h3 className="job-context-title">投递方式</h3>
+                  <p className="job-summary">{job.applicationIntro}</p>
+                  <ol className="application-questions">{job.applicationQuestions.map((question) => <li key={question}>{question}</li>)}</ol>
+                  <p className="job-summary">{job.applicationNote}</p>
+                  <div className="application-actions">
+                  <a className="job-apply" href={`mailto:chenwy1@getui.com?subject=MRTT%20${encodeURIComponent(job.title)}%20申请`}>申请这个岗位 <ArrowRight size={16} /></a>
+                    <a className="application-email" href="mailto:chenwy1@getui.com">chenwy1@getui.com</a>
+                  </div>
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+      <section className="application-section" aria-labelledby="application-title">
+        <div className="page-grid application-layout">
+          <div><p className="section-index">APPLICATION</p><h2 id="application-title">用你最真实的作品和我们聊聊</h2></div>
+          <div>
+            <p>欢迎发送简历与代表项目，邮件主题注明申请岗位。具体投递说明可展开对应岗位查看。</p>
+            <div className="application-actions">
+            <a className="primary-button" href="mailto:chenwy1@getui.com?subject=MRTT%20岗位申请">投递简历 <ArrowRight size={17} /></a>
+              <a className="application-email" href="mailto:chenwy1@getui.com">chenwy1@getui.com</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function App() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openJob, setOpenJob] = useState<number | null>(null);
+  const [page, setPage] = useState<PageId>(pageFromHash);
+
+  useEffect(() => {
+    const onHashChange = () => { setPage(pageFromHash()); setOpenJob(null); window.scrollTo({ top: 0, behavior: "instant" }); };
+    const onResize = () => { if (window.innerWidth > 820) setMobileOpen(false); };
+    window.addEventListener("hashchange", onHashChange);
+    window.addEventListener("resize", onResize);
+    return () => { window.removeEventListener("hashchange", onHashChange); window.removeEventListener("resize", onResize); };
+  }, []);
+
+  useEffect(() => {
+    const titles: Record<PageId, string> = {
+      home: "仝心圆 | AI 原生工程上下文",
+      product: "图纸建模 AI 产品 | 仝心圆",
+      research: "研究方向 | 仝心圆",
+      about: "关于我们 | 仝心圆",
+      careers: "加入我们 | 仝心圆",
+    };
+    const descriptions: Record<PageId, string> = {
+      home: "仝心圆将面向人的扫描图、PDF、DWG 与 DXF 编译为可供 CAD 和 AI Agent 使用的工程上下文。",
+      product: "了解仝心圆如何通过 AI 读取工程图纸，重建可验证的结构化数据与三维几何。",
+      research: "了解 MRTT 在工业多模态理解、工程关系、结构化预测、Agent Harness 和可靠评测方向的研究。",
+      about: "了解仝心圆背后的 MRTT 公司、产业生态与工程图纸数据能力。",
+      careers: "加入 MRTT，建设面向复杂工程任务的 Agent 系统，探索工程设计、建模、仿真与制造协同。",
+    };
+    document.title = titles[page];
+    document.querySelector('meta[name="description"]')?.setAttribute("content", descriptions[page]);
+  }, [page]);
+
+  const navigate = (nextPage: PageId) => {
+    setMobileOpen(false);
+    if (nextPage === page) { window.scrollTo({ top: 0, behavior: "instant" }); return; }
+    window.location.hash = nextPage === "home" ? "#/" : `#/${nextPage}`;
+  };
+
+  return (
+    <div className="site-shell">
+      <header className="site-header">
+        <button className="wordmark" onClick={() => navigate("home")} aria-label="返回首页">
+          <span className="brand-emblem" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14" /><circle cx="20" cy="20" r="7" /><path d="M20 2v5m0 26v5M2 20h5m26 0h5" /></svg></span>
+          <span className="brand-lockup"><strong>仝心圆</strong><small>MRTT · 工程图纸与三维</small></span>
+        </button>
+        <nav className={`main-nav ${mobileOpen ? "is-open" : ""}`} aria-label="主导航">
+          <button className={page === "home" ? "current nav-home" : "nav-home"} aria-current={page === "home" ? "page" : undefined} onClick={() => navigate("home")}>首页</button>
+          <a className="nav-explore" href={EXPLORER_URL}>结构漫游 <ArrowRight size={14} /></a>
+          <button className={page === "product" ? "current" : ""} aria-current={page === "product" ? "page" : undefined} onClick={() => navigate("product")}>产品介绍</button>
+          <details className="site-more" key={page}>
+            <summary>了解 MRTT <ChevronDown size={13} /></summary>
+            <div className="site-more-menu">
+              <button onClick={() => navigate("about")}>关于我们<span>团队与产业方向</span></button>
+              <button onClick={() => navigate("research")}>技术研究<span>工程 AI 与开源方法</span></button>
+              <button onClick={() => navigate("careers")}>加入我们<span>岗位与合作机会</span></button>
+            </div>
+          </details>
+        </nav>
+        <a className="header-contact" href="mailto:chenwy1@getui.com?subject=仝心圆%20合作咨询">联系合作 <ArrowRight size={16} /></a>
+        <button className="menu-button" onClick={() => setMobileOpen((value) => !value)} aria-label={mobileOpen ? "关闭菜单" : "打开菜单"} aria-expanded={mobileOpen}>{mobileOpen ? <X size={22} /> : <Menu size={22} />}</button>
+      </header>
+      {page !== "home" && <div className="page-location"><nav aria-label="当前位置"><a href="#/">官网首页</a><span>/</span><strong>{({product:"产品介绍",research:"技术研究",about:"关于我们",careers:"加入我们"})[page]}</strong></nav><a href={EXPLORER_URL}>去结构漫游 <ArrowRight size={14} /></a></div>}
+      {page === "home" && <HomePage navigate={navigate} />}
+      {page === "product" && <ProductPage />}
+      {page === "research" && <ResearchPage />}
+      {page === "about" && <AboutPage />}
+      {page === "careers" && <CareersPage openJob={openJob} setOpenJob={setOpenJob} />}
+      <footer className="site-footer"><div className="page-grid footer-grid"><div><strong className="footer-wordmark">MRTT</strong><p>工业数据 AI 公司 · 产品：仝心圆</p></div><div className="footer-links"><a href={EXPLORER_URL}>结构漫游</a><button onClick={() => navigate("home")}>首页</button><button onClick={() => navigate("product")}>产品介绍</button><button onClick={() => navigate("research")}>研究方向</button><a href="/neube-sr-showcase/index.html">开源重建方法</a><button onClick={() => navigate("about")}>关于我们</button><button onClick={() => navigate("careers")}>加入我们</button></div><div className="footer-meta"><span>CHINA / 2026</span><span>Copyright © 2026</span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备2026098545号-1</a><span>浙江每日仝泰科技有限公司</span><span>浙江每日互动研究院有限公司</span></div></div></footer>
+    </div>
+  );
+}
+
+export default App;

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071218">
+  <meta name="description" content="每日仝泰 / 仝心圆 · AI100%精准建模。192秒结构影像，让 AI 从生成“漂亮的模型”，走向“正确精准的模型”；从二维蓝图，到100%精准3D模型。">
+  <title>每日仝泰 / 仝心圆 · AI100%精准建模</title>
+  <meta property="og:title" content="每日仝泰 / 仝心圆 · AI100%精准建模">
+  <meta property="og:description" content="从“逼真的3D模型”到“正确精准的模型”：仝心圆让图纸、尺寸与连接在三维空间中成形。">
+  <meta property="og:image" content="../film/poster-v25.png?v=v25-continuous-20261101">
+  <link rel="stylesheet" href="player.css?v=v25-continuous-20261101">
+  <script src="player.js?v=v26-on-demand-20261103" defer></script>
+<link rel="stylesheet" href="../site-navigation.css"><link rel="stylesheet" href="../journey.css"><link rel="stylesheet" href="film-polish.css?v=20261112-refined1"><link rel="stylesheet" href="../light-surfaces.css?v=20261112-refined1"></head>
+<body>
+  <a class="skip-link" href="#film">跳到影片</a>
+  <header class="journey-header">
+ <div class="journey-global"><a class="journey-brand" href="../../#/" aria-label="返回官网首页"><span class="journey-symbol" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="7"/><path d="M20 2v5m0 26v5M2 20h5m26 0h5"/></svg></span><span>仝心圆<small>MRTT · 工程图纸与三维</small></span></a><nav aria-label="主导航"><a class="journey-home" href="../../#/">首页</a><a aria-current="location" class="journey-global-current" href="../">结构漫游</a><a href="../../#/product">产品介绍</a><details class="journey-more"><summary>了解 MRTT <span>⌄</span></summary><div><a href="../../#/about">关于我们<small>团队与产业方向</small></a><a href="../../#/research">技术研究<small>工程 AI 与开源方法</small></a><a href="../../#/careers">加入我们<small>岗位与合作机会</small></a></div></details></nav></div>
+ <div class="journey-local"><a class="journey-return" href="../../#/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h15"/></svg>返回首页</a><nav aria-label="结构漫游页面切换"><a href="../"><span class="journey-index">01</span><strong>漫游封面</strong><small>认识整塔</small></a><a href="../explore.html"><span class="journey-index">02</span><strong>三维展厅</strong><small>自由探索</small></a><a href="../film/" aria-current="page"><span class="journey-index">03</span><strong>影片导览</strong><small>观看过程</small></a></nav></div>
+</header>
+
+  <main>
+    <section class="film-heading" aria-labelledby="film-title">
+      <div><p class="eyebrow">FROM BLUEPRINT TO CAD <span class="version-chip">FILM / 25</span></p><h1 id="film-title">AI100%精准建模<span class="film-subtitle">从二维蓝图，到三维 CAD 模型</span></h1></div>
+      <p class="film-facts"><span>192 <small>秒</small></span><i aria-hidden="true"></i><span>1080<small>p</small></span><i aria-hidden="true"></i><span class="audio-fact">原创音轨</span></p>
+    </section>
+
+    <section class="cinema" aria-label="每日仝泰 / 仝心圆 · AI100%精准建模影片播放器">
+      <div class="screen" id="screen" tabindex="0" aria-label="影片画面。空格播放或暂停，左右方向键跳转5秒，M切换声音，F全屏。">
+        <video id="film" data-src="structure-film-v25-continuous.mp4?v=v25-continuous-20261101" poster="poster-v25-preview.webp" preload="none" playsinline controls aria-label="每日仝泰 / 仝心圆 · AI100%精准建模，从二维蓝图，到三维 CAD 模型，192秒流程可视化影片">
+          你的浏览器暂不支持此视频。<a href="structure-film-v25-continuous-hd.mp4?v=v25-continuous-20261101" download="每日仝泰_仝心圆_连续运镜_V25_1080P.mp4">下载 MP4 观看</a>。
+        </video>
+        <noscript><p><a href="structure-film-v25-continuous.mp4">直接观看完整影片（03:12）</a></p></noscript>
+        <div class="screen-shade" aria-hidden="true"></div>
+        <div class="screen-meta" aria-hidden="true"><span id="chapterNumber">01 / 18</span><span id="chapterTitle">AI100%精准建模</span></div>
+        <div class="opening" id="opening">
+          <button class="hero-play" id="heroPlay" type="button" aria-label="有声播放AI100%精准建模">
+            <span class="play-orbit" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 5 11 7-11 7Z"/></svg></span>
+            <span class="hero-copy">观看影片<small>PLAY THE FILM · 03:12</small></span>
+          </button>
+          <span class="headphone-note">建议开启声音 · 感受每一次连接</span>
+        </div>
+
+        <div class="player-notice" id="playerNotice" role="status" hidden>
+          <span class="spinner" aria-hidden="true"></span><p id="noticeText">正在准备影片…</p>
+          <button id="cancelLoad" type="button">取消载入</button>
+        </div>
+        <div class="player-error" id="playerError" role="alert" hidden>
+          <span class="error-mark" aria-hidden="true">↻</span><h2 id="errorTitle">影片暂未载入</h2>
+          <p id="errorText">请检查网络后重试，也可以下载影片观看。</p>
+          <div><button id="retryLoad" type="button">重新播放</button><a href="structure-film-v25-continuous-hd.mp4?v=v25-continuous-20261101" download="每日仝泰_仝心圆_连续运镜_V25_1080P.mp4">下载 MP4</a></div>
+        </div>
+
+        <div class="controls" id="controls" role="group" aria-label="影片控制">
+          <div class="seek-track">
+            <div class="seek-markers" aria-hidden="true"><i style="left:4.1667%"></i><i style="left:12.5000%"></i><i style="left:16.6667%"></i><i style="left:20.8333%"></i><i style="left:25.0000%"></i><i style="left:31.2500%"></i><i style="left:36.4583%"></i><i style="left:42.7083%"></i><i style="left:46.8750%"></i><i style="left:54.1667%"></i><i style="left:59.3750%"></i><i style="left:64.5833%"></i><i style="left:68.2292%"></i><i style="left:77.0833%"></i><i style="left:81.2500%"></i><i style="left:86.9792%"></i><i style="left:95.3125%"></i></div>
+            <input type="range" id="seek" min="0" max="192" step="0.05" value="0" aria-label="影片进度" aria-valuetext="0分0秒，共192秒" disabled>
+          </div>
+          <button class="icon-button" id="playToggle" type="button" aria-label="播放影片" aria-keyshortcuts="Space"><svg viewBox="0 0 24 24" aria-hidden="true"><path id="playIcon" d="m8 5 11 7-11 7Z"/></svg></button>
+          <div class="time"><span id="currentTime">00:00</span><span class="time-divider">/</span><span id="duration">03:12</span></div>
+          <button class="chapter-toggle" id="chapterToggle" type="button" aria-controls="chapters" aria-expanded="true"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5h4v4H4zM4 15h4v4H4zM12 7h8M12 17h8"/></svg><span>镜头章节</span></button>
+          <div class="volume-group">
+            <button class="icon-button" id="muteToggle" type="button" aria-label="静音" aria-pressed="false" aria-keyshortcuts="M"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4Z"/><path id="soundWaves" d="M16 8c2 2 2 6 0 8M19 5c4 4 4 10 0 14"/><path id="soundOff" d="m17 9 5 6m0-6-5 6" hidden/></svg></button>
+            <input id="volume" type="range" min="0" max="1" step="0.05" value="0.8" aria-label="音量" aria-valuetext="80%">
+          </div>
+          <button class="icon-button fullscreen-button" id="fullscreen" type="button" aria-label="全屏观看" aria-keyshortcuts="F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5m6 0h5v5m0 6v5h-5M9 20H4v-5"/></svg></button>
+        </div>
+        <span class="sr-only" id="announcement" role="status" aria-live="polite"></span>
+      </div>
+
+      <div class="cinema-bottom"><span class="feature-line"><span class="live-dot" aria-hidden="true"></span><span>九模块 · 8,759 实体</span><i aria-hidden="true">/</i><span>图纸解析 × 三维生成</span><i aria-hidden="true">/</i><span>360°环绕 · 穿塔漫游</span></span><a href="structure-film-v25-continuous-hd.mp4?v=v25-continuous-20261101" download="每日仝泰_仝心圆_连续运镜_V25_1080P.mp4" class="download-link" aria-label="下载1080p高清原片">下载高清原片 <span>MP4 ↓</span></a></div>
+    </section>
+
+    <section class="chapter-panel" id="chapters" aria-labelledby="chapterHeading">
+      <div class="section-label"><h2 id="chapterHeading">从整体深入细节</h2><span>THE STRUCTURE SEQUENCE</span></div>
+      <nav class="process-flow" aria-label="模块六连续生成五阶段导航">
+        <button type="button" class="process-step" data-stage-start="24" aria-label="观看模块六整套图纸解析，从24秒开始"><span class="process-node" aria-hidden="true">01</span><span class="process-copy"><strong>整套图纸</strong><small>DRAWING</small></span></button>
+        <button type="button" class="process-step" data-stage-start="40" aria-label="观看模块六单线骨架，从40秒开始"><span class="process-node" aria-hidden="true">02</span><span class="process-copy"><strong>单线骨架</strong><small>LINEWORK</small></span></button>
+        <button type="button" class="process-step" data-stage-start="60" aria-label="观看模块六角钢生成，从60秒开始"><span class="process-node" aria-hidden="true">03</span><span class="process-copy"><strong>模块角钢</strong><small>ANGLE STEEL</small></span></button>
+        <button type="button" class="process-step" data-stage-start="82" aria-label="观看模块六节点板生成，从82秒开始"><span class="process-node" aria-hidden="true">04</span><span class="process-copy"><strong>节点板生成</strong><small>PLATES</small></span></button>
+        <button type="button" class="process-step" data-stage-start="104" aria-label="观看模块六紧固件生成，从104秒开始"><span class="process-node" aria-hidden="true">05</span><span class="process-copy"><strong>紧固件生成</strong><small>FASTENERS</small></span></button>
+      </nav>
+      <div class="case-heading"><span>在连续生成中，走近每一步</span><small>CHOOSE A CLOSER LOOK</small></div>
+      <nav class="case-shortcuts" aria-label="角钢截面与连接装配细节入口">
+        <button type="button" class="case-jump" data-case-start="48" data-case-end="60" aria-label="观看模块六角钢截面，从48秒开始"><svg class="case-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M11 7h7v18h15v7H11Z"/><path class="case-guide" d="M6 7v25m5 5h22"/></svg><span><strong>角钢截面</strong><small>模块六 · 截面长成构件</small></span><time>00:48</time><i aria-hidden="true">↗</i></button>
+        <button type="button" class="case-jump" data-case-start="70" data-case-end="82" aria-label="观看模块七与模块八连接板及孔组详例，从70秒开始"><svg class="case-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="M8 8h24v24H8Z"/><circle cx="14" cy="14" r="2"/><circle cx="26" cy="14" r="2"/><circle cx="14" cy="26" r="2"/><circle cx="26" cy="26" r="2"/></svg><span><strong>板件孔组</strong><small>模块七／八 · 连接详例</small></span><time>01:10</time><i aria-hidden="true">↗</i></button>
+        <button type="button" class="case-jump" data-case-start="90" data-case-end="104" aria-label="观看模块七与模块八同轴紧固装配详例，从90秒开始"><svg class="case-icon" viewBox="0 0 40 40" aria-hidden="true"><path d="m10 7 5-3 5 3v6l-5 3-5-3Zm5 9v18m-6-9h12m-12 4h12M27 8v24"/><path class="case-guide" d="m24 28 3 4 3-4"/></svg><span><strong>同轴装配</strong><small>模块七／八 · 紧固详例</small></span><time>01:30</time><i aria-hidden="true">↗</i></button>
+      </nav>
+      <div class="chapter-list">
+        <button type="button" class="chapter is-current" data-start="0" aria-current="true" aria-label="播放第1章，AI100%精准建模，从0秒开始"><span class="chapter-order">01</span><strong>AI100%精准建模</strong><time>00:00</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="8" aria-label="播放第2章，为什么需要工程 AI，从8秒开始"><span class="chapter-order">02</span><strong>为什么需要工程 AI</strong><time>00:08</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="24" aria-label="播放第3章，整套图纸解析，从24秒开始"><span class="chapter-order">03</span><strong>整套图纸解析</strong><time>00:24</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="32" aria-label="播放第4章，视图入空间，从32秒开始"><span class="chapter-order">04</span><strong>视图入空间</strong><time>00:32</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="40" aria-label="播放第5章，单线骨架，从40秒开始"><span class="chapter-order">05</span><strong>单线骨架</strong><time>00:40</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="48" aria-label="播放第6章，角钢截面，从48秒开始"><span class="chapter-order">06</span><strong>角钢截面</strong><time>00:48</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="60" aria-label="播放第7章，模块角钢生成，从60秒开始"><span class="chapter-order">07</span><strong>模块角钢生成</strong><time>01:00</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="70" aria-label="播放第8章，孔位与节点板，从70秒开始"><span class="chapter-order">08</span><strong>孔位与节点板</strong><time>01:10</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="82" aria-label="播放第9章，节点板生成，从82秒开始"><span class="chapter-order">09</span><strong>节点板生成</strong><time>01:22</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="90" aria-label="播放第10章，同轴紧固装配，从90秒开始"><span class="chapter-order">10</span><strong>同轴紧固装配</strong><time>01:30</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="104" aria-label="播放第11章，模块紧固生成，从104秒开始"><span class="chapter-order">11</span><strong>模块紧固生成</strong><time>01:44</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="114" aria-label="播放第12章，汇入总装，从114秒开始"><span class="chapter-order">12</span><strong>汇入总装</strong><time>01:54</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="124" aria-label="播放第13章，看见完整连接，从124秒开始"><span class="chapter-order">13</span><strong>看见完整连接</strong><time>02:04</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="131" aria-label="播放第14章，360°节点环绕，从131秒开始"><span class="chapter-order">14</span><strong>360°节点环绕</strong><time>02:11</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="148" aria-label="播放第15章，沿结构上升，从148秒开始"><span class="chapter-order">15</span><strong>沿结构上升</strong><time>02:28</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="156" aria-label="播放第16章，连接的秩序，从156秒开始"><span class="chapter-order">16</span><strong>连接的秩序</strong><time>02:36</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="167" aria-label="播放第17章，穿越结构，直抵塔顶，从167秒开始"><span class="chapter-order">17</span><strong>穿越结构，直抵塔顶</strong><time>02:47</time><span class="chapter-fill" aria-hidden="true"></span></button>
+        <button type="button" class="chapter" data-start="183" aria-label="播放第18章，从二维蓝图，到100%精准3D模型，从183秒开始"><span class="chapter-order">18</span><strong>从二维蓝图，到100%精准3D模型</strong><time>03:03</time><span class="chapter-fill" aria-hidden="true"></span></button>
+      </div>
+    </section>
+
+    <section class="film-story" aria-label="关于影片"><p>读懂复杂，<br>精准成形。</p><div>大模型可以生成“逼真的3D模型”。仝心圆，让 AI 从生成“漂亮的模型”，走向“正确精准的模型”。<br>从图纸、单线骨架，到角钢、孔位、节点板与紧固件，连续看见三维构造过程。以100%精准为目标，从二维蓝图，到100%精准3D模型。<p class="story-source"><span>模块六 · 技术图面、连续生成与角钢截面</span><span>模块七／八 · 板件孔组与紧固连接详例</span><span>18 个章节 · 五阶段生成 · 三类细节 · 环绕与穿塔漫游</span></p><a href="../explore.html">自由探索这座结构 <span aria-hidden="true">↗</span></a></div><span class="story-index" aria-hidden="true">01—18</span></section>
+  </main>
+  <footer><span>本片展示从图纸到三维 CAD 的产品理念，以实际图纸与现有模型演绎生成过程，不代表自动识别结果记录。现阶段连接安装与相交仍待核验，塔腿待补；不作为工程验收或制作、安装、施工依据。</span><span>每日仝泰 / 仝心圆</span></footer>
+</body>
+</html>
