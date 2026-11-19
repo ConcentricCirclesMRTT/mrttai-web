@@ -37,7 +37,7 @@ npm run preview -- --host 127.0.0.1
 | 地址 | 内容 | 主要源码 |
 | --- | --- | --- |
 | `/` | 官网首页，突出结构漫游 | `src/App.tsx` |
-| `/#/product` | 产品介绍 | `src/App.tsx` |
+| `/#/solutions` | 行业方案：角钢输电塔（核心）、阀门制造与交通工程（扩展）；旧链接 `/#/product` 自动跳转至此 | `src/App.tsx` |
 | `/#/research`、`/#/about`、`/#/careers` | 技术研究、关于我们、加入我们 | `src/App.tsx` |
 | `/explore/` | 可旋转、展开模块的漫游封面 | `public/explore/index.html`、`cover.js` |
 | `/explore/explore.html` | 完整三维交互展厅 | `public/explore/explore.html`、`app.js` |

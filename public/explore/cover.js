@@ -193,7 +193,7 @@
       raycaster.setFromCamera(pointer, camera);
       const targets = moduleGroups.map(group => wireframe || !group.userData.mesh ? group.userData.lines : group.userData.mesh);
       const hit = raycaster.intersectObjects(targets, false)[0];
-      label.textContent = hit ? `${hit.object.userData.module.name} · ${hit.object.userData.module.role}` : '九模块 · 结构全景';
+      label.textContent = hit ? `${hit.object.userData.module.name} · ${hit.object.userData.module.role}` : '结构全景';
       for (const group of moduleGroups) {
         const mesh = group.userData.mesh;
         if (mesh) mesh.material.emissive.setHex(hit?.object.userData.module.id === group.userData.module.id ? 0x24483a : 0x000000);
@@ -205,7 +205,7 @@
     canvas.addEventListener('pointercancel', endDrag);
     canvas.addEventListener('lostpointercapture', endDrag);
     canvas.addEventListener('pointerleave', () => {
-      label.textContent = '九模块 · 结构全景';
+      label.textContent = '结构全景';
       for (const group of moduleGroups) group.userData.mesh?.material.emissive.setHex(0x000000);
       requestRender();
     });

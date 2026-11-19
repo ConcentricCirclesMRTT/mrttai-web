@@ -146,7 +146,7 @@ export function LongContextTowerViewer() {
         <button type="button" onClick={() => setRotating((value) => !value)} title={rotating ? "暂停旋转" : "继续旋转"} aria-label={rotating ? "暂停旋转" : "继续旋转"}>{rotating ? <Pause size={17} /> : <Play size={17} />}</button>
         <button type="button" onClick={() => resetRef.current()} title="重置视角" aria-label="重置视角"><RotateCcw size={17} /></button>
       </div>
-      <div className="long-context-model-label"><span>最新重构</span><strong>M1–M6 塔段</strong></div>
+      <div className="long-context-model-label"><span>最新重构</span><strong>分段装配</strong></div>
     </div>
   );
 }
