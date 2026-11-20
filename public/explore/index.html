@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffffff"><meta name="description" content="从整塔到一处连接。旋转真实九模块铁塔预览，进入结构漫游，自由探索模块与构件。">
-<title>结构漫游 · 九模块铁塔</title>
+<meta name="theme-color" content="#050a08"><meta name="description" content="从整塔到一处连接。旋转由图纸重建的铁塔，自由探索模块与构件。">
+<title>结构漫游 · 仝心圆</title>
 <script>
 function openSharedView() {
   if (!location.hash.startsWith('#view=')) return;
@@ -13,30 +13,31 @@ function openSharedView() {
 addEventListener('hashchange', openSharedView); openSharedView();
 </script>
 <link rel="stylesheet" href="entry-v26.css"><link rel="stylesheet" href="journey.css">
-<script src="assets/three.min.js" defer></script><script src="cover.js?v=20261112-scroll3" defer></script>
-<link rel="stylesheet" href="light-surfaces.css?v=20261112-refined1"></head>
+<script src="assets/three.min.js" defer></script><script src="cover.js?v=t0713-four-legs-20261119" defer></script>
+<link rel="stylesheet" href="light-surfaces.css?v=20261112-refined1"><link rel="stylesheet" href="system.css?v=20261118">
+</head>
 <body>
 <header class="journey-header">
- <div class="journey-global"><a class="journey-brand" href="../#/" aria-label="返回官网首页"><span class="journey-symbol" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="7"/><path d="M20 2v5m0 26v5M2 20h5m26 0h5"/></svg></span><span>仝心圆<small>MRTT · 工程图纸与三维</small></span></a><nav aria-label="主导航"><a class="journey-home" href="../#/">首页</a><a aria-current="location" class="journey-global-current" href="./">结构漫游</a><a href="../#/product">产品介绍</a><details class="journey-more"><summary>了解 MRTT <span>⌄</span></summary><div><a href="../#/about">关于我们<small>团队与产业方向</small></a><a href="../#/research">技术研究<small>工程 AI 与开源方法</small></a><a href="../#/careers">加入我们<small>岗位与合作机会</small></a></div></details></nav></div>
+ <div class="journey-global"><a class="journey-brand" href="../#/" aria-label="返回官网首页"><span class="journey-symbol" aria-hidden="true"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="14"/><circle cx="20" cy="20" r="6"/><path d="M20 2v5m0 26v5M2 20h5m26 0h5"/></svg></span><span>仝心圆<small>MRTT · 工程 AI</small></span></a><nav aria-label="主导航"><a class="journey-home" href="../#/">首页</a><a href="../#/solutions">行业方案</a><a aria-current="location" class="journey-global-current" href="./index.html">结构漫游</a><details class="journey-more"><summary>了解 MRTT <span>⌄</span></summary><div><a href="../#/about">关于我们<small>团队与产业方向</small></a><a href="../#/research">技术研究<small>工程 AI 与开源方法</small></a><a href="../#/careers">加入我们<small>岗位与合作机会</small></a></div></details></nav><a class="journey-contact" href="mailto:chenwy1@getui.com?subject=仝心圆%20合作咨询">联系合作 →</a></div>
  <div class="journey-local"><a class="journey-return" href="../#/"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 5-7 7 7 7M5 12h15"/></svg>返回首页</a><nav aria-label="结构漫游页面切换"><a href="./" aria-current="page"><span class="journey-index">01</span><strong>漫游封面</strong><small>认识整塔</small></a><a href="explore.html"><span class="journey-index">02</span><strong>三维展厅</strong><small>自由探索</small></a><a href="film/"><span class="journey-index">03</span><strong>影片导览</strong><small>观看过程</small></a></nav></div>
 </header>
 <main class="cover">
  <section class="cover-copy" aria-labelledby="title">
   <p class="eyebrow">仝心圆 · 结构漫游</p>
   <h1 id="title">结构漫游</h1>
-  <p class="lead">九模块铁塔 · 可交互模型</p>
+  <p class="lead">由工程图纸重建 · 可交互模型</p>
   <p class="description">拖动旋转，展开模块，<br>在三维中认识这座结构。</p>
   <div class="actions"><a class="primary" href="explore.html">开始探索 <span aria-hidden="true">↗</span></a><a class="film-link" href="film/">观看影片 <span>▷</span></a></div>
  </section>
  <section class="model-stage" aria-label="封面三维铁塔预览">
-  <a class="cover-paper cover-paper-drawing" href="../#/product"><span>从工程图纸出发 ↗</span><img src="../images/complete-tower-head-drawing.png" alt="原始塔头工程图纸" /></a>
-  <a class="cover-paper cover-paper-ui" href="explore.html"><img src="showcase/explorer-original.jpg" alt="原始展厅完整界面截图" /><span>打开完整展厅 ↗</span></a>
-  <div class="cover-model-card"><img class="model-fallback" src="tower-preview-v26.webp" alt="九模块铁塔轴测预览" width="580" height="1450"><div id="coverCanvas"></div></div>
+  <a class="cover-paper cover-paper-drawing" href="../#/solutions"><span>从工程图纸出发 ↗</span><img src="../images/complete-tower-head-drawing.png" alt="原始塔头工程图纸" /></a>
+  <a class="cover-paper cover-paper-ui" href="explore.html"><img src="../images/cases/tower-four-legs.webp" alt="四腿整塔与塔脚板三维视图" /><span>打开完整展厅 ↗</span></a>
+  <div class="cover-model-card"><img class="model-fallback" src="tower-preview-four-legs.webp" alt="含 A、B、C、D 四条塔腿的铁塔轴测预览" width="580" height="1450"><div id="coverCanvas"></div></div>
   <div class="stage-caption"><span id="previewStatus" role="status">正在准备模型</span></div>
-  <div class="model-label"><span>T0713</span><strong id="moduleLabel">九模块铁塔</strong><small>拖动即可旋转</small></div>
+  <div class="model-label"><span>演示案例</span><strong id="moduleLabel">输电铁塔</strong><small>拖动即可旋转</small></div>
   <div class="preview-controls" aria-label="封面模型控制"><button id="rotatePreview" aria-pressed="true" disabled>暂停环绕 <span>Ⅱ</span></button><button id="explodePreview" aria-pressed="false" disabled>展开模块 <span>⊞</span></button><button id="wirePreview" aria-pressed="false" disabled>结构线 <span>⌘</span></button></div>
  </section>
- <div class="cover-note"><span>9 个模块</span><span>8,759 个展示实体</span><a href="film/">观看 03:12 影片 ↗</a></div>
+ <div class="cover-note"><a href="explore.html?focus=legs">九段塔身 · 四条 VI 型塔腿 ↗</a><span>构件可回溯</span><a href="film/index.html">观看影片 ↗</a></div>
 </main>
-<footer><span>每日仝泰 / 仝心圆</span><span>九模块展示 · 塔腿待补 · 非施工依据</span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备2026098545号-1</a></footer>
+<footer><span>每日仝泰 / 仝心圆</span><span>演示模型 · 非施工依据</span><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">浙ICP备2026098545号-1</a></footer>
 </body></html>

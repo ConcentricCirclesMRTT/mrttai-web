@@ -1,1 +1,61 @@
-{"schema":"tower-step-downloads/1","files":[{"id":"tower","module":null,"label":"九模块总装 STEP","filename":"tower-step.zip","bytes":58575497,"sha256":"91a421947f19e3ed7d737fe7965d5e1d75b4d5f00403cea1acbe412ee09a3eef","stepFilename":"tower-nine-modules.step","stepBytes":362195500,"stepSha256":"42a1057b7866c8a0787edaeb5b1a14628572805e4570ed91014308a4b0c3008d","chunks":[{"url":"assets/downloads/tower-00-85a92c708c2a.zip-part","bytes":10485760,"sha256":"85a92c708c2ab36038e4fcc569a69c41f8af4788bdb2e183c99263f5be08f469"},{"url":"assets/downloads/tower-01-7896aae29f9b.zip-part","bytes":10485760,"sha256":"7896aae29f9b2f9c63e346d6db6e0c7cc6f3f50ff0841b28be43612e624c2067"},{"url":"assets/downloads/tower-02-e1182fa58348.zip-part","bytes":10485760,"sha256":"e1182fa58348578042ed824bd299109f1539fe9ee67fb4ba3d175f792fb6b666"},{"url":"assets/downloads/tower-03-6f00df32f419.zip-part","bytes":10485760,"sha256":"6f00df32f4190a3d14bc26a22576407dfde1009a8211fad863ba21c51c5eb411"},{"url":"assets/downloads/tower-04-fe226edc224b.zip-part","bytes":10485760,"sha256":"fe226edc224b1417c87a7c8355a049e6cc57088acfa3530f1185567b178231b7"},{"url":"assets/downloads/tower-05-309a8517ab9e.zip-part","bytes":6146697,"sha256":"309a8517ab9ef2a97538ff9c9e1a87d18dcd3fcf254c7650f83da0cbf9bb9982"}],"entityCount":8759,"status":"repaired-conditional","note":"M5 直杆姿态修订；下载实体与本轮核验总装一致。条件性支架与补偿件保留并明确登记；其余未闭合连接仍需复核，塔腿待补。","format":"STEP AP214 / ZIP","coordinateSystem":"assembled-world-mm","directUrl":"assets/downloads/tower-step-91a421947f19.zip"}],"scope":"九模块完整总装 STEP；分模块文件保留在本地完整交付包。","verification":"Each chunk and the reassembled ZIP carry SHA-256. ZIP contains one byte-identical STEP."}
+{
+  "schema": "tower-step-downloads/1",
+  "files": [
+    {
+      "id": "tower",
+      "module": null,
+      "label": "27 m 铁塔总装 STEP · 含四条塔腿",
+      "filename": "T0713-27m-four-legs.zip",
+      "bytes": 72716437,
+      "sha256": "2e7d11089b10066424dee43f85813d7c05455af5dc5bb2aed7368ed508eb216d",
+      "stepFilename": "T0713-27m-four-legs.step",
+      "stepBytes": 425966133,
+      "stepSha256": "91ccfbf2efb494b6bbd5cc8b663e0031e65b134573b398d320eee498e0db475c",
+      "chunks": [
+        {
+          "url": "assets/downloads/tower-four-legs-00-5c1d899e3262.zip-part",
+          "bytes": 10485760,
+          "sha256": "5c1d899e32628408f39074c73c534b46bc90cac82ccba1d3fc5f5b4cf6b940e1"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-01-5edc0a149ba7.zip-part",
+          "bytes": 10485760,
+          "sha256": "5edc0a149ba7dbe50413cb06b83c966a98ff188a32650d3c1b77024994be67de"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-02-d20fa6455d41.zip-part",
+          "bytes": 10485760,
+          "sha256": "d20fa6455d414a974359edbbcd12420a8698ef4f0a42cf3bf20d0ffb5690dc72"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-03-c6db3f27b81a.zip-part",
+          "bytes": 10485760,
+          "sha256": "c6db3f27b81af3e8cd10f24f013622ec041516debd5c9d5942c5522c9e33110d"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-04-01bc7d76edcd.zip-part",
+          "bytes": 10485760,
+          "sha256": "01bc7d76edcd356f2b3fba514735762e3965b21566390af9fccd3f393d9bbe3a"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-05-bb72a9ec9113.zip-part",
+          "bytes": 10485760,
+          "sha256": "bb72a9ec911302280dfa87255fba910795a73010cff2fc03fc516c097e30ff85"
+        },
+        {
+          "url": "assets/downloads/tower-four-legs-06-c1a611a8db21.zip-part",
+          "bytes": 9801877,
+          "sha256": "c1a611a8db211fbec480d06f7a685ae758f8d3aefa55ef4f5d79bd3257e55424"
+        }
+      ],
+      "entityCount": 10743,
+      "status": "conditional",
+      "note": "九段塔身与四条 VI 型 6.5 m 塔腿。连接与干涉仍待复核。",
+      "format": "STEP / ZIP",
+      "coordinateSystem": "assembled-world-mm",
+      "directUrl": "assets/downloads/tower-four-legs-2e7d11089b10.zip"
+    }
+  ],
+  "scope": "27 m 呼称高铁塔工作总装 STEP，含 A / B / C / D 四腿。",
+  "verification": "ZIP payload SHA-256 agrees with the STEP reopened in OpenCASCADE."
+}

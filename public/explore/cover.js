@@ -1,4 +1,4 @@
-/* Lightweight cover preview using the existing nine-module display assets. */
+/* Lightweight cover preview using the current tower assembly assets. */
 (() => {
   'use strict';
   const canvasHost = document.getElementById('coverCanvas');
@@ -193,7 +193,7 @@
       raycaster.setFromCamera(pointer, camera);
       const targets = moduleGroups.map(group => wireframe || !group.userData.mesh ? group.userData.lines : group.userData.mesh);
       const hit = raycaster.intersectObjects(targets, false)[0];
-      label.textContent = hit ? `${hit.object.userData.module.name} · ${hit.object.userData.module.role}` : '九模块 · 结构全景';
+      label.textContent = hit ? `${hit.object.userData.module.name} · ${hit.object.userData.module.role}` : '结构全景';
       for (const group of moduleGroups) {
         const mesh = group.userData.mesh;
         if (mesh) mesh.material.emissive.setHex(hit?.object.userData.module.id === group.userData.module.id ? 0x24483a : 0x000000);
@@ -205,7 +205,7 @@
     canvas.addEventListener('pointercancel', endDrag);
     canvas.addEventListener('lostpointercapture', endDrag);
     canvas.addEventListener('pointerleave', () => {
-      label.textContent = '九模块 · 结构全景';
+      label.textContent = '结构全景';
       for (const group of moduleGroups) group.userData.mesh?.material.emissive.setHex(0x000000);
       requestRender();
     });
@@ -236,7 +236,12 @@
       for (const group of moduleGroups) {
         const id = group.userData.module.id;
         group.position.copy(group.userData.initial);
-        group.position.z += (5-id) * expansion * 26;
+        const module = group.userData.module;
+        if (module.family === 'leg') {
+          group.position.x += Math.sign(module.bounds[0][0] + module.bounds[1][0]) * expansion * 48;
+          group.position.y += Math.sign(module.bounds[0][1] + module.bounds[1][1]) * expansion * 48;
+          group.position.z -= expansion * 135;
+        } else group.position.z += (5-id) * expansion * 26;
         if (id <= 2) group.position.x += (id===1 ? -1 : 1) * expansion * 60;
       }
       camera.position.y = -fitDistance * (1 + expansion * .24);

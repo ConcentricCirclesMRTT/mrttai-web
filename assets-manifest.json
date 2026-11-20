@@ -2,44 +2,48 @@
   "algorithm": "sha256",
   "assets": {
     "explore/app.js": {
-      "bytes": 82220,
-      "sha256": "761705e029fb157cb15a743c49e9fdbac141ffdeda495f873f7220ef90b37172"
+      "bytes": 83805,
+      "sha256": "c2d546894f205255fe6fcb18935078f6a25162a7408049e21931cbd64846b0b7"
     },
     "explore/assets/component-details.json": {
-      "bytes": 10200026,
-      "sha256": "6a96947a51273094596d5c1d18b0848b4a08efb26a044d8a046fdd681f25ee9b"
+      "bytes": 11419552,
+      "sha256": "ee1d394eb7dceb897b0e1f5fa713c4b26dad2bf6cc5fac1aa3b7400db8615bc2"
     },
-    "explore/assets/downloads/tower-00-85a92c708c2a.zip-part": {
+    "explore/assets/downloads/tower-four-legs-00-5c1d899e3262.zip-part": {
       "bytes": 10485760,
-      "sha256": "85a92c708c2ab36038e4fcc569a69c41f8af4788bdb2e183c99263f5be08f469"
+      "sha256": "5c1d899e32628408f39074c73c534b46bc90cac82ccba1d3fc5f5b4cf6b940e1"
     },
-    "explore/assets/downloads/tower-01-7896aae29f9b.zip-part": {
+    "explore/assets/downloads/tower-four-legs-01-5edc0a149ba7.zip-part": {
       "bytes": 10485760,
-      "sha256": "7896aae29f9b2f9c63e346d6db6e0c7cc6f3f50ff0841b28be43612e624c2067"
+      "sha256": "5edc0a149ba7dbe50413cb06b83c966a98ff188a32650d3c1b77024994be67de"
     },
-    "explore/assets/downloads/tower-02-e1182fa58348.zip-part": {
+    "explore/assets/downloads/tower-four-legs-02-d20fa6455d41.zip-part": {
       "bytes": 10485760,
-      "sha256": "e1182fa58348578042ed824bd299109f1539fe9ee67fb4ba3d175f792fb6b666"
+      "sha256": "d20fa6455d414a974359edbbcd12420a8698ef4f0a42cf3bf20d0ffb5690dc72"
     },
-    "explore/assets/downloads/tower-03-6f00df32f419.zip-part": {
+    "explore/assets/downloads/tower-four-legs-03-c6db3f27b81a.zip-part": {
       "bytes": 10485760,
-      "sha256": "6f00df32f4190a3d14bc26a22576407dfde1009a8211fad863ba21c51c5eb411"
+      "sha256": "c6db3f27b81af3e8cd10f24f013622ec041516debd5c9d5942c5522c9e33110d"
     },
-    "explore/assets/downloads/tower-04-fe226edc224b.zip-part": {
+    "explore/assets/downloads/tower-four-legs-04-01bc7d76edcd.zip-part": {
       "bytes": 10485760,
-      "sha256": "fe226edc224b1417c87a7c8355a049e6cc57088acfa3530f1185567b178231b7"
+      "sha256": "01bc7d76edcd356f2b3fba514735762e3965b21566390af9fccd3f393d9bbe3a"
     },
-    "explore/assets/downloads/tower-05-309a8517ab9e.zip-part": {
-      "bytes": 6146697,
-      "sha256": "309a8517ab9ef2a97538ff9c9e1a87d18dcd3fcf254c7650f83da0cbf9bb9982"
+    "explore/assets/downloads/tower-four-legs-05-bb72a9ec9113.zip-part": {
+      "bytes": 10485760,
+      "sha256": "bb72a9ec911302280dfa87255fba910795a73010cff2fc03fc516c097e30ff85"
     },
-    "explore/assets/downloads/tower-step-91a421947f19.zip": {
-      "bytes": 58575497,
-      "sha256": "91a421947f19e3ed7d737fe7965d5e1d75b4d5f00403cea1acbe412ee09a3eef"
+    "explore/assets/downloads/tower-four-legs-06-c1a611a8db21.zip-part": {
+      "bytes": 9801877,
+      "sha256": "c1a611a8db211fbec480d06f7a685ae758f8d3aefa55ef4f5d79bd3257e55424"
+    },
+    "explore/assets/downloads/tower-four-legs-2e7d11089b10.zip": {
+      "bytes": 72716437,
+      "sha256": "2e7d11089b10066424dee43f85813d7c05455af5dc5bb2aed7368ed508eb216d"
     },
     "explore/assets/downloads.json": {
-      "bytes": 1835,
-      "sha256": "66846456d59a3aff59db02cec4643856c858163865f409f82bdad9ffa88a4ce7"
+      "bytes": 2495,
+      "sha256": "b64007cb6835b1787c52fa052e1dfc5d3a7478523c68c34ca870d1c324b32236"
     },
     "explore/assets/evidence/m1-bom-101.webp": {
       "bytes": 12570,
@@ -1105,6 +1109,22 @@
       "bytes": 5064708,
       "sha256": "cb0a9be6b319868ef8e5dc67154399de8aa090557ed024f06affb9de7bdf6aa5"
     },
+    "explore/assets/g/m10-feet-00-4239ed61f73d.bin.gz": {
+      "bytes": 5884621,
+      "sha256": "4239ed61f73daa89d87c28153f3adbb54e35b95fd16028cf29a26729f6059f71"
+    },
+    "explore/assets/g/m11-feet-00-b0a0af48fbde.bin.gz": {
+      "bytes": 5871855,
+      "sha256": "b0a0af48fbdeccda2158395bda4f4476a57290b0b310edef27bae8e7e621802d"
+    },
+    "explore/assets/g/m12-feet-00-b96c93b4cfbe.bin.gz": {
+      "bytes": 5887376,
+      "sha256": "b96c93b4cfbe5e9b077211f3368253a4862ffa3ddb51434a7cccf282b64277c9"
+    },
+    "explore/assets/g/m13-feet-00-1080bc3340e2.bin.gz": {
+      "bytes": 7160904,
+      "sha256": "1080bc3340e206d369a372ab178eea7aa1b8a0d1620d2af64d0deaa86dd0390f"
+    },
     "explore/assets/g/m2-00-9a3af0e331ef.bin.gz": {
       "bytes": 5788439,
       "sha256": "9a3af0e331ef187256f02b11971395056bd1047b3309b3953570c58f858a3e04"
@@ -1193,29 +1213,45 @@
       "bytes": 3851217,
       "sha256": "a3474f6cde353428e9bcaec8f4e16ade3cab2e13065a9cd7f587193052b0b6b0"
     },
-    "explore/assets/g/m9-00-94f4cb51c6dc.bin.gz": {
-      "bytes": 6575115,
-      "sha256": "94f4cb51c6dc9a9b481640531597c5579a91d08fed4db9aa419f93f5d0b627de"
+    "explore/assets/g/m9-feet-00-9db0a4e5acaf.bin.gz": {
+      "bytes": 6727916,
+      "sha256": "9db0a4e5acaf9c9db7276b56ba363b4b66f73178a8d700eee40b7dd1cec3aca8"
     },
-    "explore/assets/g/m9-01-d2ca8b68ced2.bin.gz": {
-      "bytes": 6402604,
-      "sha256": "d2ca8b68ced209d033328412d9a0475aa2cb083555c22003ba9b71ea382a4403"
+    "explore/assets/g/m9-feet-01-f48355ea73da.bin.gz": {
+      "bytes": 6440189,
+      "sha256": "f48355ea73da13bcd6587f65aae079529c109fb854dc3f4ea69ff81b35e0b005"
     },
-    "explore/assets/g/m9-02-2b70a27a47f1.bin.gz": {
-      "bytes": 1903676,
-      "sha256": "2b70a27a47f1b8d4c7e6145ccfc786b4efa3c2510d70b7439d8c8f83e279b8c7"
+    "explore/assets/g/m9-feet-02-07cbcc0bc948.bin.gz": {
+      "bytes": 1859761,
+      "sha256": "07cbcc0bc948a9bb608583d6e26b4de81c0428afc48f52675b4240d882a2d7cc"
     },
     "explore/assets/inspection.json": {
-      "bytes": 62741,
-      "sha256": "0d55cc7b0fd46ae88e450beea12fa38194b5b6a8fc4298eb6b96e28801b221d0"
+      "bytes": 71121,
+      "sha256": "c0b0efe86d775817340d131dd563bc22af8b6c2aa07ddd19053b6096d2574ad2"
     },
     "explore/assets/lines.json": {
-      "bytes": 87455,
-      "sha256": "36b76a38af248cf5c131411c31ccab92b8c838b11ae223221eb52ca1492faaa2"
+      "bytes": 107358,
+      "sha256": "41a0bdd7e27270fb22cc42776010db9bc1e3349fd70da0b15c2f6be4340c4f2e"
     },
     "explore/assets/lod/m1-0d68f27f7c40.bin.gz": {
       "bytes": 163899,
       "sha256": "0d68f27f7c40b1eaef6ff84a1db6e21cde9b92621108ad63e18eb198dc22e54e"
+    },
+    "explore/assets/lod/m10-feet-00-69fc8449e64e.bin.gz": {
+      "bytes": 1636192,
+      "sha256": "69fc8449e64efc12ccad46e98cf692f5985e2025735ca7edfb22b9413e97ebcc"
+    },
+    "explore/assets/lod/m11-feet-00-0417fc820e88.bin.gz": {
+      "bytes": 1640310,
+      "sha256": "0417fc820e8883316bc2d48776852d5382173b26dceb1f0aa04fd3bc48a07be4"
+    },
+    "explore/assets/lod/m12-feet-00-8399e24e55c9.bin.gz": {
+      "bytes": 1617706,
+      "sha256": "8399e24e55c91433b684dcab52e036889a7e50e8a075dcd0ea94958ced6486b5"
+    },
+    "explore/assets/lod/m13-feet-00-ded62a39fa3a.bin.gz": {
+      "bytes": 2026404,
+      "sha256": "ded62a39fa3a20627c8ee930caab1e12afdfd890cd7d249a51a65f3a9069948f"
     },
     "explore/assets/lod/m2-6f8f35f2f69b.bin.gz": {
       "bytes": 300811,
@@ -1245,33 +1281,33 @@
       "bytes": 470536,
       "sha256": "fcde8c643b4bced8b2352a4eebeb02901ca4f9e8e52faebcbc5fcf9f6a2eeefd"
     },
-    "explore/assets/lod/m9-47a34f09ec72.bin.gz": {
-      "bytes": 543558,
-      "sha256": "47a34f09ec7296eb18bfe1025c5ba3ace3bc083f691e84a6afcbd4c36bbdb1a4"
+    "explore/assets/lod/m9-feet-00-83dfba6a3f50.bin.gz": {
+      "bytes": 999452,
+      "sha256": "83dfba6a3f50e998589703c42aac650e9f9fac220aaf4873c6a2bfc5a1b7a147"
     },
     "explore/assets/lod/manifest-v26.json": {
-      "bytes": 1354518,
-      "sha256": "80beff9f8e381901ea2abed11c85ac1d82e1494cf4945d94bee75386d89367d5"
+      "bytes": 1672355,
+      "sha256": "dca86bcc3434f58da99ed982a66bb4100e24970c49f7dc2d352b45fbb2fba779"
     },
     "explore/assets/model.json": {
-      "bytes": 8290052,
-      "sha256": "77945be843057188c39ef2d6d99ad3ef10288c685818170cccdf9aec4c1b4939"
+      "bytes": 5119041,
+      "sha256": "c39940b13327bdc9ff2a7ca3dbff21a0af9848770de8eae989c43204d102319a"
     },
     "explore/assets/three.min.js": {
       "bytes": 651650,
       "sha256": "42523ca608b32b85d51bae85a933c49b2f9e02c2191267a109d2e6dcc91b29d1"
     },
     "explore/cover.js": {
-      "bytes": 14585,
-      "sha256": "4d13990993b27279c925daabc8905046f6c5a740af5bc8656e6e594f6d773013"
+      "bytes": 14894,
+      "sha256": "ac1590988e2d82cf04d0638d68d02833784164ecb24d776bdb7446b1aaaf9b0f"
     },
     "explore/entry-v26.css": {
       "bytes": 8609,
       "sha256": "5184c0b37b8f771ec6e50d48ef561cba98f3dcde12a2c7d730177ee97f3c2d2e"
     },
     "explore/explore.html": {
-      "bytes": 12006,
-      "sha256": "8b0d1c20d2afdf83fec0e94e0f2dd57510ff8a9f88244941a9557f7e81ab6908"
+      "bytes": 12219,
+      "sha256": "04c5ed3142210e96a6549b1d892d97b5e532a85f2e2a4db628fe676431ff1ba0"
     },
     "explore/film/brand-watermark.png": {
       "bytes": 2745,
@@ -1314,16 +1350,16 @@
       "sha256": "872335efc481cf4fdbd5c1ae664a9e5a07d82d469db206c1d42ab55fa9b6a5e0"
     },
     "explore/film/film.js": {
-      "bytes": 67203,
-      "sha256": "79248dd77251278df67b1d1fbc101d5e6bacb925a5f603206f807e20b1a0f276"
+      "bytes": 67415,
+      "sha256": "5c21cd23ba02e2b0a350208073451ac0df0a61c30f9b33d31bb94c1e1dafa06f"
     },
     "explore/film/flight.js": {
       "bytes": 8255,
-      "sha256": "9c05a61435cc8a50ef3ec22d443fc03d0beee8f4b14f5d1f7c1def1acee7e18c"
+      "sha256": "5f9177efb53cf3cc21cbb60f69fbe7070328f3df9558121e96c310751bbee267"
     },
     "explore/film/index.html": {
-      "bytes": 18379,
-      "sha256": "bc66429d6a64236da2e5e3837630a7f236f1ba7961121982779906bb97cd0dfb"
+      "bytes": 18490,
+      "sha256": "aa5aef59ac267b5bca02f6cb9a7ce815585680af3a854191afb23e5ed145b875"
     },
     "explore/film/line-examples.json": {
       "bytes": 1049,
@@ -1390,16 +1426,16 @@
       "sha256": "573b5c433e7499c92a4656919be0cd933faf499da0bb9392846ec4fe49bdbf26"
     },
     "explore/film/studio-loader.js": {
-      "bytes": 2283,
-      "sha256": "a25e9620ce264d9016d061bc402d1b19376e3bb2b2a2dd8193a1f1a055fdf4b7"
+      "bytes": 2284,
+      "sha256": "863dec0c1f5d70a627a7d066d74df1d91b3b9fe70f2f88fff55e5e6f6b4d9a77"
     },
     "explore/film/studio.html": {
-      "bytes": 6147,
-      "sha256": "a223eeca247ab051aa09f99f1d3f8be465b01d73dd02cb23048c1c86ec4885ef"
+      "bytes": 6062,
+      "sha256": "5119cfae0b355eff4edcc2e1903571baf532eb451b22b2c201300886a7431181"
     },
     "explore/index.html": {
-      "bytes": 4613,
-      "sha256": "70f2a6b27750753e20bfe276cb711d62329bc75202b573cdd545c3e4a324b2dd"
+      "bytes": 4841,
+      "sha256": "8312dad8f34e76a408804df76ab8ef9560988a7eb365d814f7b47b21af57a81f"
     },
     "explore/journey.css": {
       "bytes": 5962,
@@ -1425,9 +1461,33 @@
       "bytes": 46023,
       "sha256": "a3bf7f149f9832056d3bd416ecc0bb312f0cfddc8192122ad7202f26f8dc97c5"
     },
-    "explore/tower-preview-v26.webp": {
-      "bytes": 104186,
-      "sha256": "7f38795a9d4563b025156851d1e560335aef4b7ce1719832e5f4be6e69a9b77b"
+    "explore/system.css": {
+      "bytes": 11293,
+      "sha256": "49c0d86c94533270ff93f7d7c471eb41c8f57a320b4e7a18fb2f3a58fb69ffd9"
+    },
+    "explore/tower-preview-four-legs.webp": {
+      "bytes": 115272,
+      "sha256": "1d3acf0ee9f1b3b106bbcc7d81247a090c1fcdcd67b7b0aa3626a1c8580008c9"
+    },
+    "images/cases/road-review.webp": {
+      "bytes": 93978,
+      "sha256": "6d5e7e57d5c228168afd56db015283c071a596462904df829b65f8d63efc94b2"
+    },
+    "images/cases/road-twin.webp": {
+      "bytes": 136580,
+      "sha256": "de2568d0d3b2080a0fa1f12fc376740a48c09aa7525e5c11882fa2a7ca53e36d"
+    },
+    "images/cases/tower-four-legs.webp": {
+      "bytes": 91860,
+      "sha256": "0bec2152e07f26da912d5b0f2af47beba85af8dcd34584879a96e640960a61cd"
+    },
+    "images/cases/valve-assembled.webp": {
+      "bytes": 387362,
+      "sha256": "5cbb7910dd4c176cfe2e581d4c8c8812383f9d875ec01a48bb5f1f816e4d632f"
+    },
+    "images/cases/valve-section.webp": {
+      "bytes": 224080,
+      "sha256": "b209324c5472665cf79bf300b3c5da2496fd3e85bf0a6fa870b8a2b4db727d53"
     },
     "images/complete-tower-head-drawing.png": {
       "bytes": 109531,

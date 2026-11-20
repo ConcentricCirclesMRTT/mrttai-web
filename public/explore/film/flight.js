@@ -7,7 +7,7 @@ const smoother=x=>{x=clamp(x);return x*x*x*(x*(x*6-15)+10);};
 const mix=(a,b,q)=>a+(b-a)*q;
 const blend=(a,b,q)=>a.map((x,i)=>mix(x,b[i],q));
 const END={eye:[500,-700,2200],look:[0,0,600],fov:66,up:[0,0,1]};
-const END_VELOCITY=[120,-150,200],FINAL_LOOK=[-230,-180,500];
+const END_VELOCITY=[120,-150,200],FINAL_LOOK=[-190,-145,390];
 function orbit(target,radius,yaw,elevation){return[target[0]+radius*Math.cos(elevation)*Math.cos(yaw),target[1]+radius*Math.cos(elevation)*Math.sin(yaw),target[2]+radius*Math.sin(elevation)];}
 function hermite(a,va,b,vb,q,dt){const q2=q*q,q3=q2*q;return(2*q3-3*q2+1)*a+(q3-2*q2+q)*dt*va+(-2*q3+3*q2)*b+(q3-q2)*dt*vb;}
 function hermiteVector(a,va,b,vb,q,dt){return a.map((v,i)=>hermite(v,va[i],b[i],vb[i],q,dt));}
@@ -68,9 +68,9 @@ function entryPose(THREE,t){
  return{eye:p.eye,look:new THREE.Vector3(...p.eye).addScaledVector(forward,100).toArray(),up:up.toArray(),fov:p.fov};
 }
 function closingRoute(t){
- t=Math.max(0,Math.min(9,t));const fullEye=orbit(FINAL_LOOK,2050,-.8,.15);
+ t=Math.max(0,Math.min(9,t));const fullEye=orbit(FINAL_LOOK,2550,-.8,.15);
  if(t<=4){const q=t/4;return{eye:hermiteVector(END.eye,END_VELOCITY,fullEye,[0,0,0],q,4),look:blend(END.look,FINAL_LOOK,smoother(q)),fov:mix(END.fov,34,smoother(q)),up:[0,0,1]};}
- const q=smoother((t-4)/5);return{eye:orbit(FINAL_LOOK,mix(2050,2170,q),mix(-.8,-.95,q),.15),look:[...FINAL_LOOK],fov:34,up:[0,0,1]};
+ const q=smoother((t-4)/5);return{eye:orbit(FINAL_LOOK,mix(2550,2650,q),mix(-.8,-.95,q),.15),look:[...FINAL_LOOK],fov:34,up:[0,0,1]};
 }
 function closingPose(THREE,t){return closingRoute(t);}
 function overlay(ctx,t){

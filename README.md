@@ -2,7 +2,7 @@
 
 [访问官网](https://mrttai.com/) · [结构漫游](https://mrttai.com/explore/) · [三维展厅](https://mrttai.com/explore/explore.html) · [影片导览](https://mrttai.com/explore/film/)
 
-这是 mrttai.com 的完整独立网站项目，包含 React 官网、九模块铁塔交互封面与展厅、192 秒影片导览、NeuBE 重建方法介绍，以及运行所需的模型、图纸图片和下载素材。初始版本整理自 2026-11-12 确认并上线的页面。
+这是 mrttai.com 的完整独立网站项目，包含 React 官网、九段塔身与四条 VI 型塔腿的铁塔交互封面与展厅、192 秒影片导览、NeuBE 重建方法介绍，以及运行所需的模型、图纸图片和下载素材。初始版本整理自 2026-11-12 确认并上线的页面。
 
 ## 获取并运行
 
@@ -39,7 +39,7 @@ npm run preview -- --host 127.0.0.1
 | 地址 | 内容 | 主要源码 |
 | --- | --- | --- |
 | `/` | 官网首页，突出结构漫游 | `src/App.tsx` |
-| `/#/product` | 产品介绍 | `src/App.tsx` |
+| `/#/solutions` | 行业方案：角钢输电塔（核心）、阀门制造与交通工程（扩展）；旧链接 `/#/product` 自动跳转至此 | `src/App.tsx` |
 | `/#/research`、`/#/about`、`/#/careers` | 技术研究、关于我们、加入我们 | `src/App.tsx` |
 | `/explore/` | 可旋转、展开模块的漫游封面 | `public/explore/index.html`、`cover.js` |
 | `/explore/explore.html` | 完整三维交互展厅 | `public/explore/explore.html`、`app.js` |
@@ -61,6 +61,6 @@ npm run preview -- --host 127.0.0.1
 
 ## 展示范围
 
-现有铁塔为九模块展示，塔腿待补。页面保留条件性内容、安装连接待核验等说明；交互展示与影片均不作为工程验收、制作、安装或施工依据。影片表达产品理念与模型生成过程，不代表自动识别结果记录。
+展示采用 27 m 呼称高和四条 VI 型 6.5 m 等长塔腿，共 10,743 件展示实体。页面保留条件性内容、安装连接待核验等说明；交互展示与影片均不作为工程验收、制作、安装或施工依据。影片表达产品理念与模型生成过程，不代表自动识别结果记录。
 
 项目来源、素材与第三方说明见 [NOTICE.md](NOTICE.md)。
