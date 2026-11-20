@@ -616,3 +616,30 @@ h3 { font-size: 19px; font-weight: 600; line-height: 1.4; margin-bottom: 10px; }
 }
 @keyframes spineRun { 0% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: calc(100% - 12px); opacity: 0; } }
 @keyframes dotLit { 0%, 100% { background: var(--bg); box-shadow: 0 0 6px rgba(75,220,155,.2); } 12%, 22% { background: var(--accent); box-shadow: 0 0 18px var(--accent); } 34% { background: var(--bg); box-shadow: 0 0 6px rgba(75,220,155,.2); } }
+
+/* section 01: four engineering-cycle audiences */
+.who { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 700px) { .who { grid-template-columns: minmax(0, 1fr); } }
+
+/* ── core capability: locate → trace → impact ── */
+.trace-show { display: grid; gap: 18px; }
+.trace-rail { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.trace-rail button { width: 100%; display: grid; grid-template-columns: auto 1fr; column-gap: 14px; align-items: center; text-align: left; padding: 16px 18px; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); color: var(--muted); transition: border-color .25s, background .25s, color .25s; }
+.trace-rail button:hover { border-color: var(--line-strong); color: var(--ink); }
+.trace-rail .node { grid-row: span 2; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; border: 1px solid var(--line-strong); font-family: var(--mono); font-size: 13px; transition: all .3s; }
+.trace-rail strong { font-size: 16px; color: var(--ink); font-weight: 600; }
+.trace-rail small { font-family: var(--mono); font-size: 10.5px; letter-spacing: .14em; color: var(--faint); }
+.trace-rail .is-active { border-color: rgba(75,220,155,.5); background: rgba(75,220,155,.08); color: var(--ink); }
+.trace-rail .is-active .node { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.trace-stage { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); padding: 0; overflow: hidden; }
+.trace-frame { position: relative; background: radial-gradient(ellipse at 50% 40%, #13262a, #070d10); }
+.trace-frame img { width: 100%; height: 100%; object-fit: contain; }
+.trace-detail { padding: 28px; display: grid; align-content: start; gap: 18px; }
+.trace-detail p { margin: 0; font-size: 17px; line-height: 1.7; color: var(--ink); }
+.trace-detail dl { margin: 0; display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.trace-detail dl div { display: grid; grid-template-columns: 96px 1fr; gap: 12px; padding: 12px 14px; background: rgba(8,15,19,.82); }
+.trace-detail dt { font-family: var(--mono); font-size: 11.5px; letter-spacing: .08em; color: var(--accent); }
+.trace-detail dd { margin: 0; font-size: 14px; color: var(--muted); }
+.trace-show .fine { margin: 0; }
+@media (max-width: 900px) { .trace-stage { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .trace-rail { grid-template-columns: 1fr; } .trace-rail button { padding: 12px 14px; } .trace-detail { padding: 20px; } .trace-detail dl div { grid-template-columns: 1fr; gap: 2px; } }

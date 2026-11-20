@@ -171,7 +171,7 @@ const stages: { key: string; name: string; en: string; input: string; does: stri
   },
   {
     key: "02", name: "编译", en: "COMPILE",
-    input: "资料库 + 行业协议 + 定制工艺",
+    input: "资料库 + 行业要求 + 定制工艺",
     does: "读取尺寸、标注与构件关系，形成结构化中间表示：几何、拓扑、约束、依据。",
     output: "语义 IR（可计算的工程表达）",
     human: "抽检关键标注",
@@ -209,24 +209,10 @@ const gates = [
 ] as const;
 
 const audiences = [
-  {
-    key: "CUSTOMERS", label: "制造与工程企业", title: "工厂、设计院、施工方",
-    help: "把你的图纸、行业要求与自家工艺编译成 AI 能遵循的规则，让每位工程师都能更快完成审图、算量与出图。",
-    imagine: "客户图纸进来，当天就拿到带依据的评审意见。",
-    cta: "看行业方案", to: "solutions" as const,
-  },
-  {
-    key: "CLIENTS", label: "业主、集成商与平台", title: "甲方与工业软件团队",
-    help: "我们交付的每个构件与结论都带证据和验证状态，可直接进入你的 CAD、PLM 或数字孪生系统。",
-    imagine: "验收供应商模型时，每一处都能点回图纸出处。",
-    cta: "了解方案", to: "solutions" as const,
-  },
-  {
-    key: "INVESTORS", label: "投资人", title: "关注工业与工程 AI",
-    help: "从最难的铁塔图纸起步，把方法沉淀为可复用底座，再扩展到制造与土木工程，行业数据越积越深。",
-    imagine: "一套底座，逐个行业复制可验收的落地闭环。",
-    cta: "与我们交流", to: "about" as const,
-  },
+  { key: "01 · DESIGN", label: "设计院", title: "图纸进来，方案可比选", help: "参数化模型，改一处，结果同步更新。", cta: "看设计环节", to: "solutions" as const },
+  { key: "02 · MANUFACTURING", label: "生产", title: "图纸变成零件清单", help: "按企业工艺输出 BOM 与工艺卡。", cta: "看生产环节", to: "solutions" as const },
+  { key: "03 · CONSTRUCTION", label: "施工", title: "分段装配，逐项对账", help: "物料与现场变更，实时核对。", cta: "看施工环节", to: "solutions" as const },
+  { key: "04 · OPERATIONS", label: "运维", title: "数字孪生承接运行", help: "改造与检修方案，在模型上重算。", cta: "看运维环节", to: "solutions" as const },
 ];
 
 const cycle: { t: string; d: string; icon: LucideIcon }[] = [
@@ -241,6 +227,15 @@ const pillars = [
   { t: "理解空间结构", d: "从二维表达恢复构件、连接与空间关系" },
   { t: "保留工程依据", d: "每个结果都能回到图纸、读数与判断来源" },
   { t: "连接工业系统", d: "进入 CAD、数字孪生、PLM 与工业 AI" },
+];
+
+const traceSteps: { name: string; en: string; text: string; pin: { x: number; y: number }; facts: [string, string][] }[] = [
+  { name: "定位构件", en: "LOCATE", text: "在三维模型中点选任一构件，编号、位置与所属模块即时显示。", pin: { x: 50, y: 52 },
+    facts: [["构件", "斜材 · 示意编号"], ["所属模块", "塔身分段"], ["状态", "已与图纸对齐"]] },
+  { name: "回到依据", en: "TRACE", text: "每个构件都链接到它在图纸中的视图区域与物料表条目。", pin: { x: 34, y: 30 },
+    facts: [["图纸", "多页图纸 · 对应视图"], ["物料表", "规格与数量交叉核对"], ["核验", "编号跨视图一致"]] },
+  { name: "追踪影响", en: "IMPACT", text: "修改一处尺寸，系统列出受影响的连接、用钢量与校核结果。", pin: { x: 68, y: 74 },
+    facts: [["受影响", "相关连接与分段"], ["用钢量", "自动重新汇总"], ["校核", "需工程师确认的项单独标出"]] },
 ];
 
 const serviceModes = [
@@ -259,7 +254,7 @@ const pilotSteps = [
 const researchAreas = [
   { label: "MULTIMODAL UNDERSTANDING", title: "工业多模态理解", description: "联合理解工程图像、文本、表格与文档。" },
   { label: "GEOMETRY & RELATIONS", title: "几何、拓扑与工程关系", description: "恢复构件、连接、约束与跨视图关系。" },
-  { label: "STANDARDS & PROTOCOLS", title: "标准与协议的形式化", description: "把条文、协议与企业工艺转成可检索、可校核的规则。" },
+  { label: "RULES & PRACTICE", title: "工程规则的结构化", description: "把条文、客户要求与企业工艺整理为可检索、可校核的规则。" },
   { label: "FEASIBILITY & SOLVERS", title: "结构可行性评估", description: "以求解器与规则评估几何、强度、可制造性与成本。" },
   { label: "ENGINEERING AGENT HARNESS", title: "工程 Agent Harness", description: "编排模型、领域 Skills、工具与验证流程。" },
   { label: "DATA & EVALUATION", title: "数据构造与可靠评测", description: "用真实失败案例建设数据与评测体系。" },
@@ -392,6 +387,37 @@ function GatePanel() {
   );
 }
 
+function TraceShowcase() {
+  const [i, setI] = useState(0);
+  const st = traceSteps[i];
+  return (
+    <div className="trace-show reveal">
+      <ol className="trace-rail" aria-label="三步：定位构件、回到依据、追踪影响">
+        {traceSteps.map((t, idx) => (
+          <li key={t.en}>
+            <button className={idx === i ? "is-active" : ""} aria-current={idx === i ? "step" : undefined} onClick={() => setI(idx)}>
+              <span className="node">{String(idx + 1).padStart(2, "0")}</span>
+              <strong>{t.name}</strong>
+              <small>{t.en}</small>
+            </button>
+          </li>
+        ))}
+      </ol>
+      <div className="trace-stage panel">
+        <div className="trace-frame" style={{ aspectRatio: "820 / 647" }}>
+          <img src="/images/cases/tower-hall.webp" alt="铁塔三维展厅，示意从构件出发回到依据并追踪影响" loading="lazy" />
+          <span className="pin is-hot" style={{ left: `${st.pin.x}%`, top: `${st.pin.y}%` }} aria-hidden="true">{i + 1}</span>
+        </div>
+        <div className="trace-detail" key={st.en}>
+          <p>{st.text}</p>
+          <dl>{st.facts.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        </div>
+      </div>
+      <p className="fine">示意界面，用于说明能力流程，非真实项目结果。</p>
+    </div>
+  );
+}
+
 /* ───────────────────────── pages ───────────────────────── */
 
 function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
@@ -406,7 +432,7 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
               <span className="hero-line">可核验，才可信；</span>
               <span className="hero-line grad">可信，才可用。</span>
             </h1>
-            <p className="hero-sub">工业空间智能的核心，是可信、可核验的数据。仝心圆让 AI 生成的每个构件、尺寸与结论，都能回到图纸与依据，经工程师核验签认，再进入制造与施工。</p>
+            <p className="hero-sub">仝心圆读懂多页图纸，重建三维模型。每个构件、尺寸与结论都能回到图纸与依据，修改时看清影响，经工程师核验后再进入制造与施工。</p>
             <p className="trace" aria-label="证据链"><span>构件</span><i>→</i><span>图纸位置</span><i>→</i><span>判断依据</span><i>→</i><span className="trace-end">工程师签认</span></p>
             <div className="hero-actions">
               <a className="btn btn-primary" href="#/solutions" onClick={(e) => { e.preventDefault(); navigate("solutions"); }}>查看行业方案 <ArrowRight size={17} /></a>
@@ -427,7 +453,7 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
           </a>
         </div>
         <nav className="wrap home-index" aria-label="本页目录">
-          {[["who", "01", "我们帮助谁"], ["sectors", "02", "行业方案与案例"], ["method", "03", "工作方法"], ["modes", "04", "合作方式"], ["trust", "05", "信任循环"]].map(([id, n, t]) => (
+          {[["who", "01", "我们帮助谁"], ["capability", "02", "核心能力"], ["sectors", "03", "行业方案与案例"], ["method", "04", "工作方法"], ["modes", "05", "合作方式"], ["trust", "06", "信任循环"]].map(([id, n, t]) => (
             <a key={id} href={`#${id}`} onClick={(e) => { e.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); }}><span>{n}</span>{t}</a>
           ))}
         </nav>
@@ -441,7 +467,6 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
               <article className="who-card panel reveal" key={a.key}>
                 <header><span className="mono-label">{a.key} · {a.label}</span><h3>{a.title}</h3></header>
                 <p className="who-help">{a.help}</p>
-                <p className="who-imagine"><small>想象一下</small>{a.imagine}</p>
                 <button className="btn btn-ghost" onClick={() => navigate(a.to)}>{a.cta} <ArrowRight size={15} /></button>
               </article>
             ))}
@@ -449,23 +474,30 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
         </div>
       </section>
 
+      <section className="block" id="capability" aria-labelledby="capability-title">
+        <div className="wrap">
+          <SectionHead index="02 · 核心能力" id="capability-title" title="每个构件，都能找到出处，看清影响。" lead="图纸、三维模型与物料表连成一条证据链。从任一构件出发，回到依据，追踪修改的影响。" />
+          <TraceShowcase />
+        </div>
+      </section>
+
       <section className="block block-alt" id="sectors" aria-labelledby="sector-title">
         <div className="wrap">
-          <SectionHead index="02 · 行业方案与案例" id="sector-title" title="三个行业，同一条工程链路，每个案例都可核验。" lead="以角钢输电塔为核心，向阀门制造与交通工程扩展。下方数字来自当前能力清单，状态如实标注每项能力所处阶段。" />
+          <SectionHead index="03 · 行业方案与案例" id="sector-title" title="三个行业，同一条工程链路，每个案例都可核验。" lead="以角钢输电塔为核心，向阀门制造与交通工程扩展。" />
           <IndustryExplorer />
         </div>
       </section>
 
       <section className="block" id="method" aria-labelledby="method-title">
         <div className="wrap">
-          <SectionHead index="03 · 工作方法" id="method-title" title="从图纸，到真正造得出来。" lead={<>核心思路：<strong className="warm">把工程师读图时建立的关系留下来</strong>。AI 的输出经过行业要求、可行性评估与人的核验，才进入制造与施工。</>} />
+          <SectionHead index="04 · 工作方法" id="method-title" title="我们的方案，如何赋能角钢输电、阀门制造与交通工程。" lead={<>核心思路：<strong className="warm">把工程师读图时建立的关系留下来</strong>。AI 的输出经过行业要求、可行性评估与人的核验，才进入制造与施工。</>} />
           <PipelineStepper />
         </div>
       </section>
 
       <section className="block" id="modes" aria-labelledby="modes-title">
         <div className="wrap">
-          <SectionHead index="04 · 合作方式" id="modes-title" title="三种方式，按你的需要组合。" />
+          <SectionHead index="05 · 合作方式" id="modes-title" title="三种方式，按你的需要组合。" />
           <div className="triple">
             {serviceModes.map((m) => <article className="panel reveal" key={m.t}><span className="mono-label">{m.en}</span><h3>{m.t}</h3><p>{m.d}</p></article>)}
           </div>
@@ -474,7 +506,7 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
 
       <section className="block block-alt" id="trust" aria-labelledby="trust-title">
         <div className="wrap">
-          <SectionHead index="05 · 信任循环" id="trust-title" title="每一轮交付，都让下一轮更可靠。" lead="行业规则、可核验的数据、工程师确认、落地与反馈，首尾相接，每转一圈都更可靠。" />
+          <SectionHead index="06 · 信任循环" id="trust-title" title="每一轮交付，都让下一轮更可靠。" lead="行业规则、可核验的数据、工程师确认、落地与反馈，首尾相接，每转一圈都更可靠。" />
           <div className="cycle reveal" aria-label="信任循环：行业规则、可核验数据、工程师确认、落地制造、反馈回流">
             <div className="cycle-grid" aria-hidden="true" />
             <svg className="cycle-ring" viewBox="0 0 100 100" aria-hidden="true">
@@ -611,7 +643,6 @@ function SolutionsPage() {
       <section className="block" aria-labelledby="loop-title">
         <div className="wrap">
           <SectionHead index="SHARED LOOP · 通用闭环" id="loop-title" title="每个行业，都走同一条闭环。" lead="AI 的输出不是终点。只有通过核验的模型，才会被送去制造、施工或报价。" />
-          <PipelineStepper />
           <div className="split gate-row">
             <div className="reveal">
               <p className="tag"><i />VALIDATION · 验证关口</p>
@@ -662,7 +693,7 @@ function AboutPage() {
         <div className="wrap">
           <SectionHead index="DIRECTION · 方向" title="从铁塔出发，走进制造与土木工程" lead="电力铁塔是我们的压力测试。经过验证的数据能力，正被带向阀门、电气设备、电机配件，以及交通、造价审计与报价。" />
           <div className="triple">
-            <article className="panel reveal"><h3>吃透每个行业</h3><p>围绕标准、协议与定制工艺，建立真实可验收的数据标准与交付闭环。</p></article>
+            <article className="panel reveal"><h3>吃透每个行业</h3><p>围绕标准、行业要求与定制工艺，建立真实可验收的数据标准与交付闭环。</p></article>
             <article className="panel reveal"><h3>让数据越用越好</h3><p>持续积累标准、行业知识与现场反馈，让每次交付提升后续能力。</p></article>
             <article className="panel reveal"><h3>接入更多系统</h3><p>服务 CAD、PLM、ERP/MES、数字孪生与 AI Agent，成为可靠的工程数据来源。</p></article>
           </div>
@@ -687,7 +718,7 @@ function ResearchPage() {
           <div>
             <p className="tag"><i />RESEARCH · 仝心圆研究</p>
             <h1>技术研究</h1>
-            <p className="hero-sub">聚焦多模态理解、几何与拓扑、标准协议的形式化、结构可行性评估与工程 Agent Harness。</p>
+            <p className="hero-sub">聚焦多模态理解、几何与拓扑、工程规则的结构化、结构可行性评估与工程 Agent Harness。</p>
           </div>
           <figure className="hero-picture panel"><img src="/images/research-hero-lab-v1.webp" alt="工程实验室配图" /></figure>
         </div>
@@ -875,9 +906,9 @@ function App() {
       careers: "加入我们 | 仝心圆",
     };
     const descriptions: Record<PageId, string> = {
-      home: "仝心圆把行业协议、标准与定制工艺，与工程图纸一起编译为可计算的模型，评估结构可行性、供用户核验，并落地到制造与施工。",
+      home: "仝心圆把行业要求、标准与定制工艺，与工程图纸一起编译为可计算的模型，评估结构可行性、供用户核验，并落地到制造与施工。",
       solutions: "以角钢输电塔为核心，把图纸重建、证据链与核验能力扩展到阀门制造与交通安全设计等行业。",
-      research: "了解 MRTT 在工业多模态理解、标准协议形式化、结构可行性评估、Agent Harness 与可靠评测方向的研究。",
+      research: "了解 MRTT 在工业多模态理解、工程规则结构化、结构可行性评估、Agent Harness 与可靠评测方向的研究。",
       about: "了解仝心圆背后的 MRTT 公司、产业生态与工程数据能力。",
       careers: "加入 MRTT，建设面向复杂工程任务的 Agent 系统，探索工程设计、建模、仿真与制造协同。",
     };
