@@ -123,7 +123,7 @@ const sectors: {
       { label: "结构完整性核验", text: "连接与装配关系持续核验，结果如实标注验证状态。" },
     ],
     outputs: ["三维模型 / STEP", "构件清单", "证据链"],
-    media: [{ src: "/images/cases/tower-hall.webp", alt: "铁塔三维展厅", cap: "三维展厅" }],
+    media: [{ src: "/images/cases/tower-four-legs.webp", alt: "四腿铁塔整塔轴测与塔脚板局部", cap: "整塔与塔腿" }],
   },
   {
     id: "mfg",
@@ -405,7 +405,7 @@ function TraceShowcase() {
       </ol>
       <div className="trace-stage panel">
         <div className="trace-frame" style={{ aspectRatio: "820 / 647" }}>
-          <img src="/images/cases/tower-hall.webp" alt="铁塔三维展厅，示意从构件出发回到依据并追踪影响" loading="lazy" />
+          <img src="/images/cases/tower-four-legs.webp" alt="铁塔三维展厅，示意从构件出发回到依据并追踪影响" loading="lazy" />
           <span className="pin is-hot" style={{ left: `${st.pin.x}%`, top: `${st.pin.y}%` }} aria-hidden="true">{i + 1}</span>
         </div>
         <div className="trace-detail" key={st.en}>
@@ -442,8 +442,8 @@ function HomePage({ navigate }: { navigate: (page: PageId) => void }) {
           </div>
           <a className="hud" href={EXPLORER_URL} aria-label="打开铁塔三维漫游">
             <span className="hud-corner tl" /><span className="hud-corner tr" /><span className="hud-corner bl" /><span className="hud-corner br" />
-            <div className="hud-top"><span><i className="live-dot" />LIVE MODEL</span><span>输电铁塔</span></div>
-            <img src="/explore/tower-preview-v26.webp" alt="由图纸重建的输电铁塔三维模型" />
+            <div className="hud-top"><span><i className="live-dot" />LIVE MODEL</span><span>输电铁塔 · 27 m 呼称高</span></div>
+            <img src="/explore/tower-preview-four-legs.webp" alt="由图纸重建、含四条 VI 型塔腿的输电铁塔三维模型" />
             <div className="hud-scan" aria-hidden="true" />
             <div className="hud-bottom">
               <div><small>证据链</small><b>可回溯</b></div>

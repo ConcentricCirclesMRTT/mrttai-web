@@ -3,7 +3,7 @@
 (() => {
   'use strict';
   const $ = id => document.getElementById(id);
-  const modelRevision = 'v25-continuous-20261101';
+  const modelRevision = 't0713-four-legs-20261119';
   let started = false, targetChapter = null;
   const chapters = $('chapters');
   const fail = () => {

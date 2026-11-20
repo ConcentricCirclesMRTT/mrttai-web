@@ -132,3 +132,20 @@ body:has(> .journey-header):not(:has(> .cover)):not(:has(> .topbar)) > footer { 
 .film-story :is(p, li, small, span) { color: var(--sys-muted) !important; }
 .film-story :is(h2, h3, strong) { color: var(--sys-ink) !important; }
 .film-story a { color: var(--sys-accent) !important; }
+
+.module-divider {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 8px 6px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.module-divider button {
+  border: 0;
+  background: transparent;
+  color: var(--teal);
+  padding: 6px 3px;
+  cursor: pointer;
+}
+.module-divider button:hover { text-decoration: underline; }

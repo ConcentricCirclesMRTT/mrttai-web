@@ -1,4 +1,4 @@
-/* Lightweight cover preview using the existing nine-module display assets. */
+/* Lightweight cover preview using the current tower assembly assets. */
 (() => {
   'use strict';
   const canvasHost = document.getElementById('coverCanvas');
@@ -236,7 +236,12 @@
       for (const group of moduleGroups) {
         const id = group.userData.module.id;
         group.position.copy(group.userData.initial);
-        group.position.z += (5-id) * expansion * 26;
+        const module = group.userData.module;
+        if (module.family === 'leg') {
+          group.position.x += Math.sign(module.bounds[0][0] + module.bounds[1][0]) * expansion * 48;
+          group.position.y += Math.sign(module.bounds[0][1] + module.bounds[1][1]) * expansion * 48;
+          group.position.z -= expansion * 135;
+        } else group.position.z += (5-id) * expansion * 26;
         if (id <= 2) group.position.x += (id===1 ? -1 : 1) * expansion * 60;
       }
       camera.position.y = -fitDistance * (1 + expansion * .24);
